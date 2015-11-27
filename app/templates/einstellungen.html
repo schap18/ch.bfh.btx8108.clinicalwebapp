@@ -7,10 +7,29 @@
 
 <ion-view view-title="Einstellungen">
   <ion-content>
-    <h1>da chame mich istelle</h1>
-    <h3>-> Mein Profil</h3>
-    <h3>-> Profil wechseln</h3>
-    <h3>-> Verbindung zur Smartwatch</h3>
+      <div class="list">
+
+          <a class="item item-icon-left" href="#">
+              <i class="icon ion-person"></i>
+              Mein Profil
+              <span class="item-note"> hier angemeldeter User anzeigen</span>
+          </a>
+
+          <a class="item item-icon-left" href="#">
+              <i class="icon ion-person-stalker"></i>
+              Profil wechseln
+          </a>
+
+          <a class="item item-icon-left" href="#">
+              <i class="icon ion-android-watch"></i>
+              Mit Smart Watch verbinden
+    <label class="toggle" href="#">
+            <input type="checkbox">
+            <div class="track">
+                <div class="handle"></div>
+            </div>
+        </label>
+          </a>
 
     <a class="button icon icon-right ion-chevron-right" href="#/login">Logout</a>
 

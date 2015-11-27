@@ -1,0 +1,193 @@
+<!-- Created 5.11.2015 by JD Version 1.0-->
+
+<!-- Das folgende File enthält die HTML Elemente des Dialogs zur Erfassung neuer Medikamente.-->
+
+<ion-view view-title="Add Change">
+
+  <ion-content>
+    <form name="form" ng-model="form">
+      <h3 class="dialog-title">Medikament erfassen</h3>
+      <ion-list>
+
+        <!-- Beginn der Liste -->
+        <!-- Erfassung Medikamentenname und Dosis -->
+
+        <li class="item item-input item-stacked-label">
+          <span class="input-label">Medikamentenname, Dosis</span>
+          <div class="row" id="searchfield">
+            <div class="col col-90"><input type="text" class="biginput" placeholder="" name="description" id="autocomplete" ng-model="description" /></div> <!-- ng-form="item.description" -->
+            <div class="col col-10"></div>
+          </div>
+        </li>
+
+        <!-- Erfassung Regelmässigkeit der Einname -->
+
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Regelmässigkeit
+            </div>
+            <select name="intervall" ng-model="intervall">
+              <option>1-mal täglich</option>
+              <option>2-mal täglich</option>
+              <option>3-mal täglich</option>
+              <option>4-mal täglich</option>
+              <option>5-mal täglich</option>
+              <option>6-mal täglich</option>
+            </select>
+            <ion-checkbox ng-model="bedarf.checked" name="bedarf" style="border: 0;">bei Bedarf</ion-checkbox>
+          </label>
+
+        <!-- Erfassung Enddatum der Einname -->
+
+        <li class="item item-input item-stacked-label">
+          <span class="input-label">Enddatum</span>
+          <input type="text" placeholder="" name="remind_date" ng-model="remind_date" required />
+        </li>
+
+      <!-- Date Picker 3
+
+      <input type="text" pick-a-date="date" placeholder="Select Date" /> {{ date }}
+      <input type="text" pick-a-time="time" placeholder="Select Time" /> {{ time }}
+      <input type="text" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }" />  -->
+
+        <!-- Date Picker 2
+
+        <ionic-datepicker date="currentDate" min="minDate" max="maxDate" callback="datePickerCallback">
+          <button class="button button-block button-positive"> {{ currentDate | date:'MMMM/dd/yyyy' }} </button>
+        </ionic-datepicker>  -->
+
+        <!-- Date Picker -->
+
+        <!--<div class="ionic_datepicker">
+          <div class="selected_date_full">{{selectedDateFull | date:dateFormat}}</div>
+          <div class="row no_padding">
+            <div class="col col-10 left_arrow" ng-click="!prevMonthDisable && prevMonth()"
+                 ng-class="{'pointer_events_none':prevMonthDisable}">
+              <button class="button-clear">
+                <i class="icon ion-chevron-left"
+                   ng-class="{'color_blue':(!prevMonthDisable || (!enableDatesFrom.isSet))}"></i>
+              </button>
+            </div>
+            <div class="col col-80 drop_down ">
+              <div class="row select_section">
+
+
+                <label class="item item-input item-select col col-50 month_select">
+                  <select ng-model="currentMonth" ng-change="monthChanged(currentMonth)" class="month_select" ng-options="month as month for month in monthsList " ng-selected="month == currentMonthSelected">
+                  </select>
+                </label>
+
+
+
+                <label class="item item-input item-select col col-50 year_select">
+                  <select ng-model="currentYear" ng-change="yearChanged(currentYear)" class="year_select" ng-options="year as year for year in yearsList " ng-selected="year == year">
+                  </select>
+                </label>
+
+              </div>
+            </div>
+            <div class="col col-10 right_arrow" ng-click="!nextMonthDisable && nextMonth()"
+                 ng-class="{'pointer_events_none':nextMonthDisable}">
+              <button class="button-clear">
+                <i class="icon ion-chevron-right"
+                   ng-class="{'color_blue':(!nextMonthDisable || (!enableDatesTo.isSet))}"></i>
+              </button>
+            </div>
+          </div>
+          <div class="calendar_grid">
+            <div class="row">
+              <div class="col" ng-repeat="weekName in weekNames track by $index" style="font-weight: bold" ng-bind="weekName">
+              </div>
+            </div>
+            <div style="height: 180px;">
+              <div class="row" ng-repeat="row in rows track by $index" style="text-align: center;">
+                <div class="col no_padding date_col" ng-repeat="col in cols track by $index"
+                     ng-class="{'date_selected': (dayList[row + $index].dateString === selctedDateStringCopy && dayList[row + $index].day != undefined),
+        'today' : (dayList[row + $index].dateString == today.dateString )}">
+                  <div class="date_cell" ng-click="dateSelected(dayList[row + $index])"
+                       ng-class="{'pointer_events_none':dayList[row + $index].dateDisabled}">
+                    {{ dayList[row + col].date }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="error_msg padding-horizontal"
+               ng-show="date_selection.submitted === true && date_selection.selected === false" ng-bind="errorMsgLabel">
+          </div>
+        </div>-->
+
+        <!-- Erfassung der Uhrzeiten der Einnahme -->
+
+        <li class="item item-input item-stacked-label">
+          <span class="input-label">Uhrzeit</span>
+          <div class="row"><br> </div>
+          <div class="row item item-divider">
+            <div class="col">
+              <ionic-timepicker input-obj="remind_time1">
+                <button class="button button-block button-calm overflowShow">
+                  <standard-time-no-meridian etime='remind_time1.inputEpochTime'></standard-time-no-meridian>
+                </button>
+              </ionic-timepicker>
+            </div>
+            <div class="col">
+              <ionic-timepicker input-obj="remind_time2">
+                <button class="button button-block button-calm overflowShow">
+                  <standard-time-no-meridian etime='remind_time2.inputEpochTime'></standard-time-no-meridian>
+                </button>
+              </ionic-timepicker>
+            </div>
+            <div class="col">
+              <ionic-timepicker input-obj="remind_time3">
+                <button class="button button-block button-calm overflowShow">
+                  <standard-time-no-meridian etime='remind_time3.inputEpochTime'></standard-time-no-meridian>
+                </button>
+              </ionic-timepicker>
+            </div>
+            <div class="col">
+              <ionic-timepicker input-obj="remind_time4">
+                <button class="button button-block button-calm overflowShow">
+                  <standard-time-no-meridian etime='remind_time4.inputEpochTime'></standard-time-no-meridian>
+                </button>
+              </ionic-timepicker>
+            </div>
+            <div class="col">
+              <ionic-timepicker input-obj="remind_time5">
+                <button class="button button-block button-calm overflowShow">
+                  <standard-time-no-meridian etime='remind_time5.inputEpochTime'></standard-time-no-meridian>
+                </button>
+              </ionic-timepicker>
+            </div>
+            <div class="col">
+              <ionic-timepicker input-obj="remind_time6">
+                <button class="button button-block button-calm overflowShow">
+                  <standard-time-no-meridian etime='remind_time6.inputEpochTime'></standard-time-no-meridian>
+                </button>
+              </ionic-timepicker>
+            </div>
+          </div>
+        </li>
+
+        <!-- Auswahl für Erinnerung an Medikamenteneinnahme -->
+
+        <ion-toggle ng-model="pushNotification.checked" name="pushNotification">Erinnerung</ion-toggle>
+
+        <!-- Ende der Liste -->
+        <!-- Buttons zum Speichern/Abbrechen und schliessen des Dialogs -->
+
+        <div class="button-bar">
+          <a class="button button-assertive" ng-click="leaveAddChangeDialog(form)">Abbrechen</a>
+          <a class="button button-balanced" ng-show="action=='add'" ng-init="saveEmpty(form)" ng-click="addItem(form)">Speichern</a>
+        </div>
+
+      <button class="button button-block button-positive" ng-show="action=='change'" ng-click="editItem(form)">
+          Edit</button>
+
+      </ion-list>
+    </form>
+  </ion-content>
+</ion-view>
+
+
+
+
