@@ -1,7 +1,6 @@
 <!-- Created 25.10.2015 by JD Version 1.0-->
 
-<!-- In folgenden File wird das Login mit Hilfe eines HTML Formulars erstellt. -->
-
+<!-- Das folgende File enthält die HTML Elemente welche das Einloggen des Benutzers ermöglichen -->
 
 <ion-modal-view>
   <ion-header-bar>
@@ -11,6 +10,8 @@
   <ion-view view-title="Login" name="login-view">
     <ion-content class="padding">
       <div class="list list-inset">
+
+        <!-- App-Logo -->
 
         <div class="img">
           <img src="images/broennimann.png" alt="HTML5 Icon" width="420" height="300">
@@ -24,8 +25,9 @@
               text-align: center;
             }
             </style>
-
         </div>
+
+        <!-- Formulare zur Einhabe des Benutzernamens und Passwort -->
 
         <label class="item item-input">
           <input type="text" placeholder="E-Mail" ng-model="data.username">
@@ -34,11 +36,14 @@
           <input type="password" placeholder="Passwort" ng-model="data.password">
         </label>
       </div>
-      <button class="button button-block button-calm" ng-click="login()">Login</button>
+      <button autofocus class="button button-block button-calm" ng-click="login()"  >Login</button>
 
       <div class="buttons">
         <button class="button button-clear" ng-controller="PopupCtrl" ng-click="showAlert()">Passwort vergessen</button>
       </div>
+
+      <!-- Hinweis zur Eingabe der Credentials (für Testzwecke) -->
+
       <a>Benutzername: kurt@bfh.ch</a>
       <a>Passwort: elisabeth</a>
     </ion-content>

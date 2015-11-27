@@ -1,12 +1,45 @@
 <!-- Created 5.11.2015 by JD Version 1.0-->
 
-<!-- Das folgende File enthält die HTML Elemente der Seite Browse. -->
+<!-- Das folgende File enthält die HTML Elemente der Medikamentenansicht. -->
 
 <ion-view view-title="Medikamente">
-  <ion-content>
-    <h1>mini medis si da</h1>
-    <h3>-> Medikament scannen</h3>
-    <h3>-> Medikament manuell eingeben</h3>
-    <h3>-> Medikamentenliste etc.</h3>
+  <ion-content ng-controller="TodoList">
+
+    <!-- Eingeblendeter Text, falls kein Medikament erfasst ist. -->
+
+    <ion-list option-buttons="itemButtons" show-delete="false">
+      <div class="row" ng-if="list.length == 0">
+        <div class="col"><img src="images/no_medicament.png"></div>
+        <div class="col col-75"><h4>Noch keine Medikamente erfasst</h4></div>
+      </div>
+
+      <!-- Elemente der zu anzeigenden Medikamente -->
+
+      <ion-item ng-controller="PopupCtrl" ng-repeat="item in list" item="item" item-type="item item-icon-left" ng-click="showEditItem(form)"> <!--ng-click="showConfirm(item)"-->
+        <div class="row row-center">
+          <div class="col"><img src="images/ex_medicament.png"></div>
+          <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br><i class="SubListTitle">{{ item.intervall }}</i> <j class="ion-android-calendar align-right"> {{ item.remind_date }}</j></div>
+        </div>
+        <div class="row item item-divider">
+          <div class="col" ng-if="item.bedarf == true">Einnahme: bei Bedarf</div>
+          <div class="col"><standard-time-no-meridian etime='item.remind_time1' ng-if="item.remind_time1" /></div>
+          <div class="col"><standard-time-no-meridian etime='item.remind_time2' ng-if="item.remind_time2" /></div>
+          <div class="col"><standard-time-no-meridian etime='item.remind_time3' ng-if="item.remind_time3" /></div>
+          <div class="col"><standard-time-no-meridian etime='item.remind_time4' ng-if="item.remind_time4" /></div>
+          <div class="col"><standard-time-no-meridian etime='item.remind_time5' ng-if="item.remind_time5" /></div>
+          <div class="col"><standard-time-no-meridian etime='item.remind_time6' ng-if="item.remind_time6" /></div>
+          <div class="col" ng-if="item.pushNotification == true"><div class="col ion-ios-bell small align-right"></div></div>
+        </div>
+          <!-- <div class="col ion-ios-bell small align-right"></div> -->
+      </ion-item>
+ </ion-list>
+
+    <!-- Buttons zur Eingabe/Scannen des Medikaments -->
+
+    <div class="button-bar">
+      <a class="button button-positive icon-left ion-android-create" ng-click="showAddChangeDialog('add')">Medikament erfassen</a>
+      <a class="button button-positive icon-left ion-qr-scanner">Verpackung scannen</a>
+    </div>
+
   </ion-content>
 </ion-view>

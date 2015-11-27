@@ -1,10 +1,49 @@
 <!-- Created 5.11.2015 by JD Version 1.0-->
 
-<!-- Das folgende File enthält die HTML Elemente der Seite New. Sie dient zur Vorlage von
- neuen Seiten der App-->
+<!-- Das folgende File enthält die HTML Elemente der Seite Todo. Sie zeigt die Medikamente an, welche an diesem
+Tag noch eingenommen werden müssen.-->
+
 
 <ion-view view-title="To Do">
-  <ion-content>
-    <h1>ebis zum mache</h1>
+  <ion-content ng-controller="TodoList">
+
+    <ion-list option-buttons="itemButtons" show-delete="false">
+
+      <!-- Ein Text wird angezeigt, wenn keine Medikamente genommen werden müssen/keine erfasst sind -->
+
+      <div class="row" ng-if="list.length == 0">
+        <div class="col"><img src="images/thumbsup.png"></div>
+        <div class="col col-75"><h4>Keine Medikamente zum Einnehmen</h4></div>
+      </div>
+
+      <!-- Die Liste der einzunehmenden Medikamente wird angezeigt. Name, Regelmässigkeit, sowie Enddatum sind ersichtlich -->
+
+      <ion-item ng-controller="PopupCtrl" ng-repeat="item in list" item="item" item-type="item item-icon-left" on-swipe-down="showLater(item)" on-swipe-left="removeItem(item)" ng-hide="peekabooItem" ng-click="showConfirm()" ng-tap="showConfirm()"> <!-- on-swipe-left="peekabooItem = true" -->
+        <div class="row row-center">
+          <div class="col"><img src="images/ex_medicament.png"></div>
+          <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br><i class="SubListTitle">{{ item.intervall }}, bis {{ item.remind_date }}</i></div>
+        </div>
+      </ion-item>
+
+      <!-- Eine Anleitung zur Bedienung der Todo-Liste (mit verschiedenen Gesten) -->
+
+    </ion-list>
+      <div class="card-stable">
+      <div class="card">
+        <div class="item item-divider">
+          Anleitung
+        </div>
+        <div class="item item-text-wrap ion-navigate">
+          Klick = Erinnerung Bearbeiten
+        </div>
+        <div class="item item-text-wrap ion-android-arrow-forward">
+          Nach rechts wischen = Medikament eingenommen
+        </div>
+        <div class="item item-text-wrap ion-android-arrow-down">
+          Nach unten wischen = Später erinnern
+        </div>
+      </div>
   </ion-content>
 </ion-view>
+
+
