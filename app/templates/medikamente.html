@@ -5,7 +5,7 @@
 <ion-view view-title="Medikamente">
   <ion-content ng-controller="TodoList">
 
-    <!-- Eingeblendeter Text, falls kein Medikament erfasst ist. -->
+    <!-- Listen-Element wird eingeblendet, falls kein Medikament erfasst ist. (also Liste = 0 Elemente aufweist) -->
 
     <ion-list option-buttons="itemButtons" show-delete="false">
       <div class="row" ng-if="list.length == 0">
@@ -13,12 +13,14 @@
         <div class="col col-75"><h4>Noch keine Medikamente erfasst</h4></div>
       </div>
 
-      <!-- Elemente der zu anzeigenden Medikamente -->
+      <!-- Elemente der zu anzeigenden Medikamente
+      Die Elemente werden vom Speicher gezogen und angezeigt (Medikamentenname, Erinnerungszeigen, Enddatum etc.)
+       Mittels Klick auf das Element der Liste soll es in einer neuen Maske bearbeitet werden können (noch in Arbeit) -->
 
-      <ion-item ng-controller="PopupCtrl" ng-repeat="item in list" item="item" item-type="item item-icon-left" ng-click="showEditItem(form)"> <!--ng-click="showConfirm(item)"-->
+      <ion-item ng-controller="PopupCtrl" ng-repeat="item in list" item="item" item-type="item item-icon-left" ng-click="ShowConfirmItem(item)">
         <div class="row row-center">
           <div class="col"><img src="images/ex_medicament.png"></div>
-          <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br><i class="SubListTitle">{{ item.intervall }}</i> <j class="ion-android-calendar align-right"> {{ item.remind_date }}</j></div>
+          <div class="col col-80"><b class="ListTitle">{{ item.description }}</b><br><i class="SubListTitle">{{ item.intervall }}</i> <j class="ion-android-calendar align-right"> {{ item.remind_date }}</j></div>
         </div>
         <div class="row item item-divider">
           <div class="col" ng-if="item.bedarf == true">Einnahme: bei Bedarf</div>
@@ -30,14 +32,16 @@
           <div class="col"><standard-time-no-meridian etime='item.remind_time6' ng-if="item.remind_time6" /></div>
           <div class="col" ng-if="item.pushNotification == true"><div class="col ion-ios-bell small align-right"></div></div>
         </div>
-          <!-- <div class="col ion-ios-bell small align-right"></div> -->
       </ion-item>
  </ion-list>
 
-    <!-- Buttons zur Eingabe/Scannen des Medikaments -->
+    <!-- Button zur Erfassung des Medikaments -->
 
     <div class="button-bar">
       <a class="button button-positive icon-left ion-android-create" ng-click="showAddChangeDialog('add')">Medikament erfassen</a>
+
+      <!-- Button zum Scannen des Medikaments (zurzeit nicht implementiert) -->
+
       <a class="button button-positive icon-left ion-qr-scanner">Verpackung scannen</a>
     </div>
 

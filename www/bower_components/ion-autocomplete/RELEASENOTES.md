@@ -1,5 +1,25 @@
 # Release notes of ion-autocomplete
 
+## Version 0.3.1
+
+* Tag: [0.3.1](https://github.com/guylabs/ion-autocomplete/tree/v0.3.1)
+* Release: [ion-autocomplete-0.3.1.zip](https://github.com/guylabs/ion-autocomplete/archive/v0.3.1.zip)
+
+### Changes
+
+* Added the `max-selected-items` attribute to restrict the selected search items - [#58](https://github.com/guylabs/ion-autocomplete/issues/58).
+* Added the `cancel-button-clicked-method` attribute to be able to get notified when the cancel button is clicked - [#63](https://github.com/guylabs/ion-autocomplete/issues/63).
+* Added the `external-model` attribute to be able to prepopulate the selected items and to clear them programmatically - [#66](https://github.com/guylabs/ion-autocomplete/issues/66), [#89](https://github.com/guylabs/ion-autocomplete/issues/89).
+* Added the ability to pass the `ng-model-options` to the inner search input field - [#91](https://github.com/guylabs/ion-autocomplete/issues/91)
+* Added the ability to initialize the search items within the `items-method` - [#57](https://github.com/guylabs/ion-autocomplete/issues/57)
+
+### Migration notes
+
+* As of version `0.3.1` the `multiple-select` attribute has been dropped in favor of the `max-selected-items` attribute.
+Please have a look at the documentation here https://github.com/guylabs/ion-autocomplete#the-max-selected-items on how to migrate this.
+* The `search-items` attribute has been removed as now the initialization of the `search-items` is done in the `items-method`. See the 
+new documentation here https://github.com/guylabs/ion-autocomplete#the-items-method.
+
 ## Version 0.3.0
 
 * Tag: [0.3.0](https://github.com/guylabs/ion-autocomplete/tree/v0.3.0)
@@ -14,7 +34,7 @@
 
 ### Migration notes
 
-* As of version 0.3.0 the component does not support the element restriction anymore, such that you are just able to 
+* As of version `0.3.0` the component does not support the element restriction anymore, such that you are just able to 
 use the attribute restriction on all your elements. This means that you need to convert all `<ion-autocomplete ... />` 
  tags to the following tag: `<input ion-autocomplete type="text" readonly="readonly" class="ion-autocomplete" autocomplete="off" ... />`
 

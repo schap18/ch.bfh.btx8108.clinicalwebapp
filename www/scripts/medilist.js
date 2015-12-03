@@ -1,5 +1,8 @@
 /**
  * Created by jd on 20.11.15.
+ *
+ * Das folgende Javascript enthält die Liste aller zugelassenen Medikamente der Swissmedic (Stand: 03.12.2015)
+ *
  */
 
 var medilist = ["1001 Blattgrün Dragées",

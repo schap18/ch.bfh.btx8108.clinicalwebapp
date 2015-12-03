@@ -4,10 +4,9 @@
  * Die folgende Datei enthält alle Scripts, welche Java-Scripts Akvititäten starten.
  */
 
-angular.module('starter.controllers', [])
-angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', 'angular-datepicker'])
+angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -251,7 +250,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
       $scope.addItem = function(form) {
         var newItem = {};
         // Add values from form to object
-        newItem.description = form.description.$modelValue;
+        newItem.description = form.description.$modelValue.title;//$scope.selectedMedi;
         newItem.intervall = form.intervall.$modelValue;
         newItem.remind_date = form.remind_date.$viewValue;
         newItem.bedarf = form.bedarf.$modelValue;
@@ -454,19 +453,15 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
       //---------------------------------------------- Autocomplete--------------------------------------
 
+      //Die folgende Funktion ruft den Array aus medilist.js auf und durchsucht deren Elemente gemäss der Tastatureingabe
+      //des Benutzers bei der Erfassung eines Medikaments.
+
+      $scope.medilist = _.map(medilist, function (item) {
+        return {name: item}
+      });
       $scope.setupAutocomplete = function (){
 
-        // setup autocomplete function pulling from medilist[] array
-        $('#autocomplete').autocomplete({
-          lookup: medilist,
-
-          onSelect: function (suggestion) {
-            document.getElementById("autocomplete").value = suggestion.value;
-
-          }
-        });
       };
-
 
       // ---------------------------------------------End Autocomplete--------------------------------
 

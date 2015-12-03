@@ -1,6 +1,6 @@
 {
   "name": "ion-autocomplete",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A configurable Ionic directive for an autocomplete dropdown",
   "keywords": [
     "AngularJS",
@@ -58,7 +58,6 @@
   ],
   "scripts": {
     "start": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager start",
-    "install": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
-    "test": "grunt build"
+    "test": "[ -d node_modules/grunt-protractor-runner ] && node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update && grunt build"
   }
 }

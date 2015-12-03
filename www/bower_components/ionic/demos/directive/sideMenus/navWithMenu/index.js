@@ -34,7 +34,7 @@ angular.module('navWithMenu', ['ionic'])
       url: "/playlists",
       views: {
         'menuContent' :{
-          templateUrl: "../../../../../../templates/sessions.html",
+          templateUrl: "templates/playlists.html",
           controller: 'PlaylistsCtrl'
         }
       }
@@ -44,7 +44,7 @@ angular.module('navWithMenu', ['ionic'])
       url: "/playlists/:playlistId",
       views: {
         'menuContent' :{
-          templateUrl: "../../../../../../templates/session.html",
+          templateUrl: "templates/playlist.html",
           controller: 'PlaylistCtrl'
         }
       }

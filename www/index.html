@@ -15,6 +15,7 @@ die Stylesheets einbezogen. -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
     <link rel="stylesheet" href="bower_components/ion-autocomplete/dist/ion-autocomplete.css" />
+    <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <link href="styles/style.css" rel="stylesheet">
@@ -34,16 +35,15 @@ die Stylesheets einbezogen. -->
     <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
     <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
     <script src="bower_components/ion-autocomplete/dist/ion-autocomplete.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/datepicker-for-ionic/dist/templates.js"></script>
-    <script src="bower_components/datepicker-for-ionic/dist/ionic-datepicker.js"></script>
+    <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
     <!-- endbower -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ionic/js/angular/angular-resource.min.js"></script>
     <!-- endbuild -->
 
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+    <!--  <script src="cordova.js"></script> -->
 
     <!-- your app's js -->
     <!-- build:js scripts/scripts.js -->
@@ -54,11 +54,8 @@ die Stylesheets einbezogen. -->
     <!-- endbuild -->
 
     <!-- Other Scripts -->
-    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
-    <script src="bower_components/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
+
     <script src="bower_components/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
-    <script src="bower_components/angular/soapclient.js"></script>
-    <script src="bower_components/angular/angular.soap.js"></script>
     <!--<script scr="scripts/jQuery/external/jquery/jquery.js"></script>-->
     <script scr="scripts/jQuery/jquery-ui.js"></script>
     <script scr="scripts/jQuery/jquery-ui.min.js"></script>
@@ -69,20 +66,6 @@ die Stylesheets einbezogen. -->
     <script src="scripts/currency-autocomplete.js"></script>
     <script src="scripts/jquery.csv-0.71.js"></script>
     <script src="scripts/medilist.js"></script>
-
-    <!-- Datepicker 1 https://github.com/rajeshwarpatlolla/ionic-datepicker -->
-    <script src="bower_components/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
-
-    <!-- Datepicker 2  https://github.com/celsomarques/ionic-datepicker -->
-    <link href="bower_components/datepicker-for-ionic/dist/style.css" rel="stylesheet">
-    <!-- path to ionic/angularjs js -->
-    <script src="bower_components/datepicker-for-ionic/dist/templates.min.js"></script>
-    <script src="bower_components/datepicker-for-ionic/dist/ionic-datepicker.min.js"></script>
-
-    <!-- Datepicker 3 https://github.com/alongubkin/angular-datepicker and here: http://amsul.ca/pickadate.js/date/ -->
-
-    <script src="bower_components/angular-native-datepicker/build/angular-datepicker.js"></script>
-
   </head>
 
   <body ng-app="starter" animation="slide-left-right-ios7">

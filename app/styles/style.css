@@ -46,6 +46,12 @@ Das folgende File enthält die zusätzlichen CSS Elemente zusätzlich zum Framew
 .autocomplete-selected { background: #f0f0f0; }
 .autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }
 
+#description_dropdown {
+  overflow-y: auto;
+  max-height: 150px;
+  width: 480px;
+  position: relative;
+}
 
 #searchfield form .biginput:focus {
   color: #858585;
@@ -71,6 +77,12 @@ Das folgende File enthält die zusätzlichen CSS Elemente zusätzlich zum Framew
   font-style: italic;
 }
 
+/* Die Elemente der  Medikamentenliste werden umgebrochen. */
+
+.ListTitle {
+  overflow: initial;
+  white-space: initial;
+}
 
 
 
