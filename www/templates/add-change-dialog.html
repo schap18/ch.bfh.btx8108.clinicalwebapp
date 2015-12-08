@@ -57,10 +57,11 @@
             <ion-checkbox ng-model="bedarf.checked" name="bedarf" style="border: 0;">bei Bedarf</ion-checkbox>
           </label>
 
-        <!-- Erfassung Enddatum der Einname mittels einer Datumsauswahl (noch in Arbeit) -->
+        <!-- Erfassung Enddatum/Ablaufdatum der Einname mittels einer Datumsauswahl (noch in Arbeit) -->
 
         <li class="item item-input item-stacked-label">
-          <span class="input-label">Enddatum</span>
+          <span ng-hide="bedarf.checked" class="input-label">Enddatum</span>
+          <span ng-show="bedarf.checked" class="input-label">Ablaufdatum</span>
           <input type="date" placeholder="" name="remind_date" ng-model="remind_date" required />
         </li>
 
@@ -123,8 +124,14 @@
        </li>
 
         <!-- Auswahl für Erinnerung an Medikamenteneinnahme mittels Toggle-Funktion-->
+        <a ng-hide="taegl1">
+        <ion-toggle ng-model="pushNotification.checked" name="pushNotification">Erinnerung <x> &nbsp; </x> <i ng-show="pushNotification.checked" class="icon ion-ios-bell small assertive"></i></ion-toggle>
+        </a>
 
-        <ion-toggle ng-model="pushNotification.checked" name="pushNotification" ng-hide="taegl1">Erinnerung</ion-toggle>
+          <!--<div class="col" ng-show="item.pushNotification == true"><div class="col ion-ios-bell small align-right"></div></div>-->
+          <!--</div>-->
+
+
 
         <!-- Ende der Liste -->
 

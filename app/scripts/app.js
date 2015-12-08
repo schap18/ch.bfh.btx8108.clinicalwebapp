@@ -156,6 +156,4 @@ Die folgenden Scripts konfigurieren die Navigation der Menüelemente.
 
 })
 
-
-
 ;

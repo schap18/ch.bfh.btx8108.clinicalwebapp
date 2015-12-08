@@ -159,24 +159,31 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
     });
   };
 
+  $scope.editMedikament = function(item) {
+    var confirmPopup = $ionicPopup.show({
+      template: "<style>.popup { width:700px; text-align:center; }</style><h4>Medikament<h4/>",
+      // title: 'MyTitle',
+      // subTitle: 'MySubTitle',
+      scope: $scope,
+      buttons: [
+        {
+          text: 'Löschen',
+          type: 'button-assertive',
+          onTap: function (item) {
+            $scope.removeItem(item);
+          }
+
+        },
+
+        {
+          text: 'Bearbeiten',
+          type: 'button-calm',
+        }
+      ]
+    });
+  };
+
 })
-
-  // Beispiel-Script für Test-Todo liste
-
-.controller('TodosCtrl', function($scope) {
-
-  $scope.todos = [
-    {name: 'Clean the kitchen'},
-    {name: 'Do whatever'},
-    {name: 'Also'}
-    ]
-
-    $scope.addTodo = function() {
-      $scope.todos.push({name: 'Todo'})
-    }
-
-})
-
 
 //Dieser Controller regelt die Funktionen der Todo-Lsite (Hinzufügen, Anzeigen, Löschen etc.)
 
@@ -326,6 +333,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
       // Elemente der Todoliste ausblenden
 
       $scope.peekabooItem = false;
+      $scope.hideManual = true;
 
       // Diese Funktion regelt die Erfassung und das Speichern der Einnahme-Zeit/-en
 
