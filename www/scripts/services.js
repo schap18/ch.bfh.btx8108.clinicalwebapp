@@ -34,6 +34,21 @@ angular.module('starter.services', ['ngResource'])
   }
 })
 
+// Der folgende Service regelt die Timeouts vom Anzeigen bestimmter Elemente (z.B. Haftungsausschuss)
+
+    .service('showAlertSrvc', ['$timeout', function($timeout) {
+      return function(delay) {
+        var result = {hidden:true};
+        $timeout(function() {
+          result.hidden=false;
+        }, delay);
+        return result;
+      };
+    }])
+    .controller('testController', function($scope, showAlertSrvc){
+      $scope.text = showAlertSrvc(4500);
+    })
+
   //This function saves the List of the Medication locally
 
   .factory('ListFactory', function() {
@@ -59,3 +74,8 @@ angular.module('starter.services', ['ngResource'])
     };
     return listSrv;
   });
+<<<<<<< HEAD
+=======
+
+;
+>>>>>>> 78d8a77936f2b66f621b8406ac95f66ba8565df7

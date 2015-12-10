@@ -33,5 +33,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.pushwoosh.plugins.pushwoosh": {
+        "source": {
+            "type": "registry",
+            "id": "com.pushwoosh.plugins.pushwoosh"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

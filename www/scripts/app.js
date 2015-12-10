@@ -96,6 +96,24 @@ Die folgenden Scripts konfigurieren die Navigation der Menüelemente.
       }
     })
 
+      .state('app.compendium', {
+        url: '/compendium',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/compendium.html'
+          }
+        }
+      })
+
+      .state('app.symptoms', {
+        url: '/symptoms',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/symptoms.html'
+          }
+        }
+      })
+
     .state('app.einstellungen', {
       url: '/einstellungen',
       views: {
@@ -155,7 +173,5 @@ Die folgenden Scripts konfigurieren die Navigation der Menüelemente.
 
 
 })
-
-
 
 ;

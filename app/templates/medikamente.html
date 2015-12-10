@@ -10,27 +10,31 @@
     <ion-list option-buttons="itemButtons" show-delete="false">
       <div class="row" ng-if="list.length == 0">
         <div class="col"><img src="images/no_medicament.png"></div>
-        <div class="col col-75"><h4>Noch keine Medikamente erfasst</h4></div>
+        <div class="col col-75"><h4>Noch keine Medikamente erfasst.</h4></div>
       </div>
 
       <!-- Elemente der zu anzeigenden Medikamente
       Die Elemente werden vom Speicher gezogen und angezeigt (Medikamentenname, Erinnerungszeigen, Enddatum etc.)
        Mittels Klick auf das Element der Liste soll es in einer neuen Maske bearbeitet werden können (noch in Arbeit) -->
 
-      <ion-item ng-controller="PopupCtrl" ng-repeat="item in list" item="item" item-type="item item-icon-left" ng-click="ShowConfirmItem(item)">
+      <ion-item ng-controller="PopupCtrl" ng-repeat="item in list" item="item" item-type="item item-icon-left" ng-click="editMedikament()">
+
         <div class="row row-center">
           <div class="col"><img src="images/ex_medicament.png"></div>
-          <div class="col col-80"><b class="ListTitle">{{ item.description }}</b><br><i class="SubListTitle">{{ item.intervall }}</i> <j class="ion-android-calendar align-right"> {{ item.remind_date }}</j></div>
+          <div class="col col-80"><b class="ListTitle">{{ item.description }}</b><br>
+            <i class="SubListTitle">{{ item.intervall }}</i>
+            <k class="SubListTitle" ng-if="item.bedarf == true">Einnahme bei Bedarf</k>
+            <j class="ion-android-calendar align-right" ng-hide="item.remind_date == false"> {{ item.remind_date | date: "dd.MM.yyyy" }}</j>
+          </div>
         </div>
-        <div class="row item item-divider">
-          <div class="col" ng-if="item.bedarf == true">Einnahme: bei Bedarf</div>
+        <div class="row item item-divider" ng-hide="item.bedarf == true">
           <div class="col"><standard-time-no-meridian etime='item.remind_time1' ng-if="item.remind_time1" /></div>
           <div class="col"><standard-time-no-meridian etime='item.remind_time2' ng-if="item.remind_time2" /></div>
           <div class="col"><standard-time-no-meridian etime='item.remind_time3' ng-if="item.remind_time3" /></div>
           <div class="col"><standard-time-no-meridian etime='item.remind_time4' ng-if="item.remind_time4" /></div>
           <div class="col"><standard-time-no-meridian etime='item.remind_time5' ng-if="item.remind_time5" /></div>
           <div class="col"><standard-time-no-meridian etime='item.remind_time6' ng-if="item.remind_time6" /></div>
-          <div class="col" ng-if="item.pushNotification == true"><div class="col ion-ios-bell small align-right"></div></div>
+          <div class="col" ng-if="item.pushNotification == true"><div class="col ion-ios-bell small align-right assertive"></div></div>
         </div>
       </ion-item>
  </ion-list>
@@ -44,6 +48,20 @@
 
       <a class="button button-positive icon-left ion-qr-scanner">Verpackung scannen</a>
     </div>
+
+    <!-- Eine Anleitung zur Bedienung der Medikamenten-Liste -->
+
+    <div class="card-stable">
+      <div class="card">
+        <div class="item item-divider" ng-click="hideManual=false">
+          Anleitung
+        </div>
+        <a ng-hide="hideManual">
+        <div class="item item-text-wrap ion-ios-paperplane">
+          Klick auf Medikament = Medikament Bearbeiten/Löschen
+        </div>
+        </a>
+      </div>
 
   </ion-content>
 </ion-view>

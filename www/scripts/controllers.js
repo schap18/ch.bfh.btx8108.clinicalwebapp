@@ -45,6 +45,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
       $scope.closeLogin();
     }, 1000);*/
   };
+
 })
 
 
@@ -159,28 +160,55 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
     });
   };
 
+  $scope.editMedikament = function(item) {
+    var confirmPopup = $ionicPopup.show({
+      template: "<style>.popup { width:700px; text-align:center; }</style><h4>Medikament<h4/>",
+      // title: 'MyTitle',
+      // subTitle: 'MySubTitle',
+      scope: $scope,
+      buttons: [
+        {
+          text: 'Löschen',
+          type: 'button-assertive',
+          onTap: function (item) {
+            $scope.removeItem(item);
+          }
+
+        },
+
+        {
+          text: 'Bearbeiten',
+          type: 'button-calm',
+        }
+      ]
+    });
+  };
+
+  $scope.timedMessage = function(item) {
+    var confirmPopup = $ionicPopup.show({
+      template: "<style>.popup { width:700px; text-align:center; }</style><h4>Erinnerung in<h4/>",
+      // title: 'MyTitle',
+      // subTitle: 'MySubTitle',
+      scope: $scope,
+      buttons: [
+        {
+          text: '10 min',
+          type: 'button-calm'
+        },
+
+        {
+          text: '20 min',
+          type: 'button-calm',
+        }
+      ]
+    });
+  };
+
 })
-
-  // Beispiel-Script für Test-Todo liste
-
-.controller('TodosCtrl', function($scope) {
-
-  $scope.todos = [
-    {name: 'Clean the kitchen'},
-    {name: 'Do whatever'},
-    {name: 'Also'}
-    ]
-
-    $scope.addTodo = function() {
-      $scope.todos.push({name: 'Todo'})
-    }
-
-})
-
 
 //Dieser Controller regelt die Funktionen der Todo-Lsite (Hinzufügen, Anzeigen, Löschen etc.)
 
-  .controller('TodoList', ['ListFactory', '$scope', '$ionicModal',
+  .controller('TodoList', ['ListFactory', '$scope', '$ionicModal', '$timeout', '$q', '$ionicPopup',
     function(ListFactory, $scope, $ionicModal, $timeout, $q, $ionicPopup) {
 
       // Load the add / change dialog from the given template URL
@@ -250,8 +278,9 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
       $scope.addItem = function(form) {
         var newItem = {};
         // Add values from form to object
-        newItem.description = form.description.$modelValue.title;//$scope.selectedMedi;
-        newItem.intervall = form.intervall.$modelValue;
+        //newItem.description = form.description.$modelValue.title;//$scope.selectedMedi;
+        newItem.description = form.description.$modelValue ? form.description.$modelValue.title: $('input#description_value').val();
+        newItem.intervall = $scope.intervall; //form.intervall.$modelValue;
         newItem.remind_date = form.remind_date.$viewValue;
         newItem.bedarf = form.bedarf.$modelValue;
         if (!newItem.bedarf) {
@@ -282,15 +311,30 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
 
       $scope.showEditItem = function(item) {
 
+        //console.log("Item selected");
+
         // Remember edit item to change it later
-        $scope.tmpEditItem = item;
+        //$scope.tmpEditItem = item;
+
+        // Open dialog
+        //$scope.showAddChangeDialog('change');
 
         // Preset form values
-        $scope.form.description.$setViewValue(item.description);
-        // Open dialog
-        $scope.showAddChangeDialog('change');
+        //$('input#description_value').val(item.description);
+        //$scope.form.description.$setViewValue(item.description);
+        //$scope.form.intervall.$setViewValue(item.intervall);
+        //$scope.form.remind_date.$setViewValue(item.remind_date);
+        //$scope.form.bedarf.$setViewValue(item.bedarf);
+        //$scope.form.remind_time1.$setViewValue(item.remind_time1.inputEpochTime);
+        //$scope.form.description.$setViewValue(item.remind_time2.inputEpochTime);
+        //$scope.form.description.$setViewValue(item.remind_time3.inputEpochTime);
+        //$scope.form.description.$setViewValue(item.remind_time4.inputEpochTime);
+        //$scope.form.description.$setViewValue(item.remind_time5.inputEpochTime);
+        //$scope.form.description.$setViewValue(item.remind_time6.inputEpochTime);
+        //$scope.form.description.$setViewValue(item.pushNotification);
 
-        console.log("we are here");
+
+
       };
 
       $scope.editItem = function(form) {
@@ -310,6 +354,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
       // Elemente der Todoliste ausblenden
 
       $scope.peekabooItem = false;
+      $scope.hideManual = true;
 
       // Diese Funktion regelt die Erfassung und das Speichern der Einnahme-Zeit/-en
 
@@ -346,6 +391,66 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
 
         };
       }
+
+      // Hier wird eine Condition ausgeführt, welche die Uhrzeit abhändig von der Auswahl des Intervalls einblendet/ausblendet.
+
+      $scope.taegl1 = true;
+      $scope.taegl2 = true;
+      $scope.taegl3 = true;
+      $scope.taegl4 = true;
+      $scope.taegl5 = true;
+      $scope.taegl6 = true;
+
+      // Inhalt des Dropdowns
+
+      $scope.data = { 'numbers' : ["1x täglich", "2x täglich", "3x täglich", "4x täglich", "5x täglich", "6x täglich"]};
+
+      //Funktion zum Einblenden- & Ausblenden verschiedener Intervalle je nach Auswahl
+
+      $scope.checkCondition = function (key) {
+        $scope.intervall = key;
+
+        $scope.taegl1 = true;
+        $scope.taegl2 = true;
+        $scope.taegl3 = true;
+        $scope.taegl4 = true;
+        $scope.taegl5 = true;
+        $scope.taegl6 = true;
+
+        if(key === '1x täglich'){
+          $scope.taegl1=false;
+        }
+        else if (key =='2x täglich') {
+          $scope.taegl1=false;
+          $scope.taegl2=false;
+        }
+        else if (key =='3x täglich') {
+          $scope.taegl1=false;
+          $scope.taegl2=false;
+          $scope.taegl3=false;
+        }
+        else if (key =='4x täglich') {
+          $scope.taegl1=false;
+          $scope.taegl2=false;
+          $scope.taegl3=false;
+          $scope.taegl4=false;
+        }
+        else if (key =='5x täglich') {
+          $scope.taegl1=false;
+          $scope.taegl2=false;
+          $scope.taegl3=false;
+          $scope.taegl4=false;
+          $scope.taegl5=false;
+        }
+        else if (key =='6x täglich') {
+          $scope.taegl1=false;
+          $scope.taegl2=false;
+          $scope.taegl3=false;
+          $scope.taegl4=false;
+          $scope.taegl5=false;
+          $scope.taegl6=false;
+        }
+      };
 
       /////////////////////////////////////// Timed TestPop Up
 
@@ -397,59 +502,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
       //
         //////////////////////// Timed PopUp end
 
-      //---------------------------------------------- Date Picker 1--------------------------------------
 
-      //$scope.datepickerObject = {
-      //  titleLabel: 'Title',  //Optional
-      //  todayLabel: 'Today',  //Optional
-      //  closeLabel: 'Close',  //Optional
-      //  setLabel: 'Set',  //Optional
-      //  setButtonType : 'button-assertive',  //Optional
-      //  todayButtonType : 'button-assertive',  //Optional
-      //  closeButtonType : 'button-assertive',  //Optional
-      //  inputDate: new Date(),  //Optional
-      //  mondayFirst: true,  //Optional
-      //  disabledDates: disabledDates, //Optional
-      //  weekDaysList: weekDaysList, //Optional
-      //  monthList: monthList, //Optional
-      //  templateType: 'popup', //Optional
-      //  showTodayButton: 'true', //Optional
-      //  modalHeaderColor: 'bar-positive', //Optional
-      //  modalFooterColor: 'bar-positive', //Optional
-      //  from: new Date(2012, 8, 2), //Optional
-      //  to: new Date(2018, 8, 25),  //Optional
-      //  callback: function (val) {  //Mandatory
-      //  datePickerCallback(val);
-      //  }
-      //  dateFormat: 'dd-MM-yyyy', //Optional
-      //  closeOnSelect: false, //Optional
-      //};
-
-
-      //---------------------------------------------- Date Picker 2--------------------------------------
-
-      //$scope.currentDate = new Date();
-      //$scope.minDate = new Date(2015, 6, 1);
-      //$scope.maxDate = new Date(2017, 6, 31);
-      //
-      //$scope.datePickerCallback = function (val) {
-      //  if (!val) {
-      //    console.log('Date not selected');
-      //  } else {
-      //    console.log('Selected date is : ', val);
-      //  }
-      //};
-
-      //---------------------------------------------- Date Picker 3--------------------------------------
-
-// somewhere in your controller
-//      $scope.options = {
-//        format: 'yyyy-mm-dd', // ISO formatted date
-//        onClose: function(e) {
-//          // do something when the picker closes
-//        }
-//      }
-//      $('.datepicker').pickadate()
 
       //---------------------------------------------- Autocomplete--------------------------------------
 
@@ -465,36 +518,8 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
 
       // ---------------------------------------------End Autocomplete--------------------------------
 
-
-
-
     }
   ])
-
-
-
-// SOAP Test Webservice
-
-  //.service("userservice", ['$soap',function($soap){
-  //  var base_url = "http://www.guru4.net/articoli/javascript-soap-client/demo/webservicedemo.asmx";
-  //
-  //  return {
-  //    getusers: function(){
-  //      return $soap.post(base_url,"getusers");
-  //    }
-  //  }
-  //}])
-  //
-  //.controller('moinctrl', ['$scope', 'userservice', function($scope, userservice) {
-  //  console.log('asdf');
-  //  $scope.users = [{firstname: 'test', lastname: 'muster'}];
-  //  //userservice.getusers().then(function(users){
-  //  //  $scope.users = users;
-  //  //});
-  //
-  //}])
-
-// End Webservice
 
 // Diese Funktion steuert die Formatierung und Umrechnung der Zeit
 
@@ -537,15 +562,6 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
       }
     };
   });
-
-/*// Test Cordova InAppBrowser
-
-document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady() {
-  window.open = cordova.InAppBrowser.open;
-}*/
-
-
 ;
 
 

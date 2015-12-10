@@ -6,7 +6,7 @@
 
   <ion-content>
     <form name="form" ng-model="form">
-      <h3 class="dialog-title">Medikament erfassen</h3>
+      <h3 class="dialog-title">Medikament bearbeiten</h3>
       <ion-list>
 
         <!-- Beginn der Liste -->
@@ -46,9 +46,10 @@
               Regelmässigkeit
             </div>
 
-            <!-- Dropdown des Intervalls für die tägliche Einnahme -->
+            <!-- hier hats irgendeinen Fehler :( -->
 
-            <select  ng-model="intervall" id="caller" ng-change="checkCondition(intervall)">
+            <!-- ng-model sollte "intervall" sein... -->
+            <select  ng-model="intervall" id="caller" ng-change="checkCondtition(intervall)">
               <option value="" id="">- bitte wählen -</option>
               <option ng-repeat="(key, value) in data.numbers" key="{{value}}">{{value}}</option>
             </select>
@@ -56,11 +57,10 @@
             <ion-checkbox ng-model="bedarf.checked" name="bedarf" style="border: 0;">bei Bedarf</ion-checkbox>
           </label>
 
-        <!-- Erfassung Enddatum/Ablaufdatum der Einname mittels einer Datumsauswahl (integriert in Ionic) -->
+        <!-- Erfassung Enddatum der Einname mittels einer Datumsauswahl (noch in Arbeit) -->
 
         <li class="item item-input item-stacked-label">
-          <span ng-hide="bedarf.checked" class="input-label">Enddatum</span>
-          <span ng-show="bedarf.checked" class="input-label">Ablaufdatum</span>
+          <span class="input-label">Enddatum</span>
           <input type="date" placeholder="" name="remind_date" ng-model="remind_date" required />
         </li>
 
@@ -123,14 +123,8 @@
        </li>
 
         <!-- Auswahl für Erinnerung an Medikamenteneinnahme mittels Toggle-Funktion-->
-        <a ng-hide="taegl1">
-        <ion-toggle ng-model="pushNotification.checked" name="pushNotification">Erinnerung <x> &nbsp; </x> <i ng-show="pushNotification.checked" class="icon ion-ios-bell small assertive"></i></ion-toggle>
-        </a>
 
-          <!--<div class="col" ng-show="item.pushNotification == true"><div class="col ion-ios-bell small align-right"></div></div>-->
-          <!--</div>-->
-
-
+        <ion-toggle ng-model="pushNotification.checked" name="pushNotification" ng-hide="taegl1">Erinnerung</ion-toggle>
 
         <!-- Ende der Liste -->
 

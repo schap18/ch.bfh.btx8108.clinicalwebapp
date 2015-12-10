@@ -45,24 +45,23 @@
             <div class="input-label">
               Regelmässigkeit
             </div>
-            <select name="intervall" ng-model="intervall">
-              <option>1-mal täglich</option>
-              <option>2-mal täglich</option>
-              <option>3-mal täglich</option>
-              <option>4-mal täglich</option>
-              <option>5-mal täglich</option>
-              <option>6-mal täglich</option>
+
+            <!-- Dropdown des Intervalls für die tägliche Einnahme -->
+
+            <select  ng-model="intervall" id="caller" ng-change="checkCondition(intervall)">
+              <option value="" id="">- bitte wählen -</option>
+              <option ng-repeat="(key, value) in data.numbers" key="{{value}}">{{value}}</option>
             </select>
+
             <ion-checkbox ng-model="bedarf.checked" name="bedarf" style="border: 0;">bei Bedarf</ion-checkbox>
           </label>
 
-
-
-        <!-- Erfassung Enddatum der Einname mittels einer Datumsauswahl (noch in Arbeit) -->
+        <!-- Erfassung Enddatum/Ablaufdatum der Einname mittels einer Datumsauswahl (integriert in Ionic) -->
 
         <li class="item item-input item-stacked-label">
-          <span class="input-label">Enddatum</span>
-          <input type="text" placeholder="" name="remind_date" ng-model="remind_date" required />
+          <span ng-hide="bedarf.checked" class="input-label">Enddatum</span>
+          <span ng-show="bedarf.checked" class="input-label">Ablaufdatum</span>
+          <input type="date" placeholder="" name="remind_date" ng-model="remind_date" required />
         </li>
 
         <!-- Erfassung der Uhrzeiten der Einnahme werden mit Hilfe des ionic-timepickers erstellt, wobei
@@ -70,13 +69,13 @@
         und formatiert. -->
 
 
-       <li class="item item-input item-stacked-label">
+       <li class="item item-input item-stacked-label" ng-hide="taegl1" >
          <span class="input-label">Uhrzeit</span>
          <div class="row"><br> </div>
          <div class="row item item-divider">
            <div class="col">
              <ionic-timepicker input-obj="remind_time1">
-               <button class="button button-block button-calm overflowShow">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl1">
                  <standard-time-no-meridian etime='remind_time1.inputEpochTime'></standard-time-no-meridian>
                </button>
              </ionic-timepicker>
@@ -84,35 +83,35 @@
 
            <div class="col">
              <ionic-timepicker input-obj="remind_time2">
-               <button class="button button-block button-calm overflowShow">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl2">
                  <standard-time-no-meridian etime='remind_time2.inputEpochTime'></standard-time-no-meridian>
                </button>
              </ionic-timepicker>
            </div>
            <div class="col">
              <ionic-timepicker input-obj="remind_time3">
-               <button class="button button-block button-calm overflowShow">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl3">
                  <standard-time-no-meridian etime='remind_time3.inputEpochTime'></standard-time-no-meridian>
                </button>
              </ionic-timepicker>
            </div>
            <div class="col">
              <ionic-timepicker input-obj="remind_time4">
-               <button class="button button-block button-calm overflowShow">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl4">
                  <standard-time-no-meridian etime='remind_time4.inputEpochTime'></standard-time-no-meridian>
                </button>
              </ionic-timepicker>
            </div>
            <div class="col">
              <ionic-timepicker input-obj="remind_time5">
-               <button class="button button-block button-calm overflowShow">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl5">
                  <standard-time-no-meridian etime='remind_time5.inputEpochTime'></standard-time-no-meridian>
                </button>
              </ionic-timepicker>
            </div>
            <div class="col">
              <ionic-timepicker input-obj="remind_time6">
-               <button class="button button-block button-calm overflowShow">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl6">
                  <standard-time-no-meridian etime='remind_time6.inputEpochTime'></standard-time-no-meridian>
                </button>
              </ionic-timepicker>
@@ -124,8 +123,14 @@
        </li>
 
         <!-- Auswahl für Erinnerung an Medikamenteneinnahme mittels Toggle-Funktion-->
+        <a ng-hide="taegl1">
+        <ion-toggle ng-model="pushNotification.checked" name="pushNotification">Erinnerung <x> &nbsp; </x> <i ng-show="pushNotification.checked" class="icon ion-ios-bell small assertive"></i></ion-toggle>
+        </a>
 
-        <ion-toggle ng-model="pushNotification.checked" name="pushNotification">Erinnerung</ion-toggle>
+          <!--<div class="col" ng-show="item.pushNotification == true"><div class="col ion-ios-bell small align-right"></div></div>-->
+          <!--</div>-->
+
+
 
         <!-- Ende der Liste -->
 
