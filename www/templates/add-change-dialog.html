@@ -46,10 +46,9 @@
               Regelmässigkeit
             </div>
 
-            <!-- hier hats irgendeinen Fehler :( -->
+            <!-- Dropdown des Intervalls für die tägliche Einnahme -->
 
-            <!-- ng-model sollte "intervall" sein... -->
-            <select  ng-model="intervall" id="caller" ng-change="checkCondtition(intervall)">
+            <select  ng-model="intervall" id="caller" ng-change="checkCondition(intervall)">
               <option value="" id="">- bitte wählen -</option>
               <option ng-repeat="(key, value) in data.numbers" key="{{value}}">{{value}}</option>
             </select>
@@ -57,7 +56,7 @@
             <ion-checkbox ng-model="bedarf.checked" name="bedarf" style="border: 0;">bei Bedarf</ion-checkbox>
           </label>
 
-        <!-- Erfassung Enddatum/Ablaufdatum der Einname mittels einer Datumsauswahl (noch in Arbeit) -->
+        <!-- Erfassung Enddatum/Ablaufdatum der Einname mittels einer Datumsauswahl (integriert in Ionic) -->
 
         <li class="item item-input item-stacked-label">
           <span ng-hide="bedarf.checked" class="input-label">Enddatum</span>

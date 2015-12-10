@@ -1,0 +1,31 @@
+<!-- Created 5.11.2015 by JD Version 1.0-->
+
+<!-- Das folgende File enthält die HTML Elemente der Seite Arzneimittelinformationen.
+Hier können Informationen zu Arzneimittel vom Compendium der Firma Documed abgerufen werden-->
+
+<ion-view view-title="Arzneimittelinformationen">
+  <ion-content ng-controller="AppCtrl">
+
+    <!-- Haftungsausschluss welcher beim Laden der Webseite angezeigt wird. -->
+
+    <div class="card-stable" ng-controller="testController" ng-show="text.hidden">
+      <div class="card">
+        <div class="item item-divider ion-alert-circled">
+          Haftungsausschluss
+        </div>
+        <a>
+          <div class="item item-text-wrap">
+            Für Richtigkeit der folgenden Informationen ist der Haftungsausschluss von Documed zu beachten.
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Browser in der App wird geladen und die Webseite aufgerufen. -->
+
+    <div class="frame">
+      <iframe width="100%" height="800px" src="https://compendium.ch/home/de?Platform=Mobile"></iframe>
+    </div>
+
+  </ion-content>
+</ion-view>

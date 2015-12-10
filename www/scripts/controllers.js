@@ -45,6 +45,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
       $scope.closeLogin();
     }, 1000);*/
   };
+
 })
 
 
@@ -177,6 +178,26 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
 
         {
           text: 'Bearbeiten',
+          type: 'button-calm',
+        }
+      ]
+    });
+  };
+
+  $scope.timedMessage = function(item) {
+    var confirmPopup = $ionicPopup.show({
+      template: "<style>.popup { width:700px; text-align:center; }</style><h4>Erinnerung in<h4/>",
+      // title: 'MyTitle',
+      // subTitle: 'MySubTitle',
+      scope: $scope,
+      buttons: [
+        {
+          text: '10 min',
+          type: 'button-calm'
+        },
+
+        {
+          text: '20 min',
           type: 'button-calm',
         }
       ]
@@ -380,9 +401,13 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
       $scope.taegl5 = true;
       $scope.taegl6 = true;
 
+      // Inhalt des Dropdowns
+
       $scope.data = { 'numbers' : ["1x täglich", "2x täglich", "3x täglich", "4x täglich", "5x täglich", "6x täglich"]};
 
-      $scope.checkCondtition = function (key) {
+      //Funktion zum Einblenden- & Ausblenden verschiedener Intervalle je nach Auswahl
+
+      $scope.checkCondition = function (key) {
         $scope.intervall = key;
 
         $scope.taegl1 = true;
