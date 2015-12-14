@@ -64,7 +64,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
 
     $scope.login = function() {
       LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
-        $state.go('app.home');
+        $state.go('app.medikamente');
       }).error(function(data) {
         var alertPopup = $ionicPopup.alert({
           title: 'Login failed!',
@@ -174,32 +174,12 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
             $scope.removeItem(item);
           }
 
-        },
-
-        {
-          text: 'Bearbeiten',
-          type: 'button-calm',
         }
-      ]
-    });
-  };
-
-  $scope.timedMessage = function(item) {
-    var confirmPopup = $ionicPopup.show({
-      template: "<style>.popup { width:700px; text-align:center; }</style><h4>Erinnerung in<h4/>",
-      // title: 'MyTitle',
-      // subTitle: 'MySubTitle',
-      scope: $scope,
-      buttons: [
-        {
-          text: '10 min',
-          type: 'button-calm'
-        },
-
-        {
-          text: '20 min',
-          type: 'button-calm',
-        }
+        //,
+        //{
+        //  text: 'Bearbeiten',
+        //  type: 'button-calm',
+        //}
       ]
     });
   };
@@ -278,7 +258,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
       $scope.addItem = function(form) {
         var newItem = {};
         // Add values from form to object
-        //newItem.description = form.description.$modelValue.title;//$scope.selectedMedi;
+        // newItem.description = form.description.$modelValue.title;//$scope.selectedMedi;
         newItem.description = form.description.$modelValue ? form.description.$modelValue.title: $('input#description_value').val();
         newItem.intervall = $scope.intervall; //form.intervall.$modelValue;
         newItem.remind_date = form.remind_date.$viewValue;
@@ -351,10 +331,23 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
         $scope.leaveAddChangeDialog();
       }
 
+
       // Elemente der Todoliste ausblenden
 
       $scope.peekabooItem = false;
+
       $scope.hideManual = true;
+
+      /*myVar = setTimeout(hideElement, 3000);
+
+      function hideElement() {
+        $scope.hideManual = true;
+      }*/
+
+      // Elemente der Todoliste die angezeigt werden
+
+      //????????????????
+
 
       // Diese Funktion regelt die Erfassung und das Speichern der Einnahme-Zeit/-en
 
@@ -392,6 +385,16 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
         };
       }
 
+      // Timed Message
+
+
+      function myFunction() {
+        myVar = setTimeout(alertFunc, 3000);
+      }
+
+      function alertFunc() {
+        alert("Hello!");
+      }
       // Hier wird eine Condition ausgeführt, welche die Uhrzeit abhändig von der Auswahl des Intervalls einblendet/ausblendet.
 
       $scope.taegl1 = true;

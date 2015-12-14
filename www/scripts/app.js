@@ -42,15 +42,6 @@ Die folgenden Scripts konfigurieren die Navigation der Menüelemente.
     controller: 'AppCtrl'
   })
 
-  .state('app.home', {
-    url: '/home',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/home.html'
-      }
-    }
-  })
-
     .state('app.medikamente', {
       url: '/medikamente',
       views: {

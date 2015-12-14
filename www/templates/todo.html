@@ -18,16 +18,21 @@ Tag noch eingenommen werden müssen.-->
 
       <!-- Die Liste der einzunehmenden Medikamente wird angezeigt. Name, Regelmässigkeit, sowie Enddatum sind ersichtlich -->
 
-      <ion-item ng-controller="PopupCtrl" ng-repeat="item in list" item="item" item-type="item item-icon-left" on-swipe-down="showLater(item)" ng-hide="peekabooItem" ng-click="showConfirm()" ng-tap="showConfirm()"> <!-- on-swipe-left="peekabooItem = true" -->
-        <div class="row row-center">
-          <div class="col"><img src="images/ex_medicament.png"></div>
-          <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br>
-            <i class="SubListTitle">{{ item.intervall }}</i>
-            <j class="SubListTitle" ng-if="item.bedarf == true">Einnahme bei Bedarf </j>
-            <x>&nbsp;</x>
-            <k class="SubListTitle" ng-hide="item.remind_date == false"> bis {{ item.remind_date | date: "dd.MM.yyyy" }}</k></div>
-        </div>
-      </ion-item>
+      <!-- Wenn Element 1x täglich ausgewählt, soll Liste angezeigt werden. -->
+
+      <div ng-controller="PopupCtrl" ng-if="remind_time1.value != null ">
+        <ion-item ng-repeat="item in list" item="item" item-type="item item-icon-left" on-swipe-down="showLater(item)" ng-hide="peekabooItem" ng-click="showConfirm()" ng-tap="showConfirm()"> <!-- on-swipe-left="peekabooItem = true" -->
+          <div class="row row-center">
+            <div class="col"><img src="images/ex_medicament.png"></div>
+            <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br>
+              <i class="SubListTitle">{{ item.intervall }}</i>
+              <j class="SubListTitle" ng-if="item.bedarf == true">Einnahme bei Bedarf </j>
+              <x>&nbsp;</x>
+              <k class="SubListTitle" ng-hide="item.remind_date == false"> bis {{ item.remind_date | date: "dd.MM.yyyy" }}</k></div>
+          </div>
+        </ion-item>
+      </div>
+
     </ion-list>
 
       <!-- Eine Anleitung zur Bedienung der Todo-Liste (mit verschiedenen Gesten) -->
@@ -49,6 +54,8 @@ Tag noch eingenommen werden müssen.-->
         </div>
         </a>
       </div>
+
+
 
   </ion-content>
 </ion-view>
