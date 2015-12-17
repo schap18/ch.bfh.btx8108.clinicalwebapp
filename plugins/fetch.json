@@ -5,12 +5,6 @@
             "id": "org.apache.cordova.device"
         }
     },
-    "org.apache.cordova.console": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.console"
-        }
-    },
     "com.ionic.keyboard": {
         "source": {
             "type": "registry",
@@ -40,6 +34,31 @@
             "id": "com.pushwoosh.plugins.pushwoosh"
         },
         "is_top_level": true,
+        "variables": {}
+    },
+    "de.appplant.cordova.plugin.local-notification": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/katzer/cordova-plugin-local-notifications",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-device": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-device"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-registerusernotificationsettings": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-registerusernotificationsettings"
+        },
+        "is_top_level": false,
         "variables": {}
     }
 }

@@ -4,7 +4,7 @@
  * Die folgende Datei enthält alle Scripts, welche Java-Scripts Akvititäten starten.
  */
 
-angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
+angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', 'ngCordova'])
 
 .controller('AppCtrl', function($scope, $ionicModal) {
 
@@ -175,11 +175,11 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
           }
 
         }
-        //,
-        //{
-        //  text: 'Bearbeiten',
-        //  type: 'button-calm',
-        //}
+        ,
+        {
+          text: 'Abbrechen',
+          type: 'button-calm',
+        }
       ]
     });
   };
@@ -523,6 +523,67 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker'])
 
     }
   ])
+
+    .controller("ExampleController", function ($scope, $cordovaLocalNotification) {
+
+
+      //cordova.plugins.notification.local.schedule({
+      //  id: 1,
+      //  title: "Message Title",
+      //  message: "Message Text",
+      //  at: date,
+      //  sound: sound,
+      //  icon: "http://domain.com/icon.png"
+      //});
+
+      // Adding a Notification
+
+
+
+        $scope.addingNot = function () {
+
+// ========== Scheduling
+
+          $scope.scheduleSingleNotification = function () {
+            $cordovaLocalNotification.schedule({
+              id: 1,
+              title: 'Title here',
+              text: 'Text here',
+              data: {
+                customProperty: 'custom value'
+              }
+            }).then(function (result) {
+              // ...
+            });
+          };
+
+
+          //console.log('adding notification');
+          //
+          //var alarmTime = new Date();                         // current date time
+          //alarmTime.setMinutes(alarmTime.getMinutes() + 1);  // add 1 minute to current date time
+          //
+          //console.log('time added');
+          //
+          //$cordovaLocalNotification.add({
+          //  id: "12345",
+          //  date: "alarmTime",
+          //  message: "This is a message",
+          //  title: "This is a title",
+          //  autoCancel: true
+          //}).then(function () {
+          //  console.log("The notification was set");
+          //});
+        };
+
+        // Nofitication if Scheduled (true/false)
+
+        //$scope.isScheduled = function () {
+        //  $cordovaLocalNotification.isScheduled("12345").then(function (isScheduled) {
+        //    alert("Notification 12345 scheduled: " + isScheduled);
+        //  });
+        //};
+    })
 
 // Diese Funktion steuert die Formatierung und Umrechnung der Zeit
 
