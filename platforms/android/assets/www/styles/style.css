@@ -1,0 +1,90 @@
+/* Created 13.11.2015 by JD Version 1.0
+
+Das folgende File enthält die zusätzlichen CSS Elemente zusätzlich zum Framework,
+ welche bestimmte Elemente grafisch darstellt. */
+
+.card-blue .item{
+  background: lightblue;
+}
+
+.ListTitle {
+  font-size: x-large;
+}
+
+.SubListTitle {
+  color: #0c63ee;
+}
+
+.medium {
+  font-size: 30px;
+}
+
+.small {
+  font-size: 22px;
+}
+
+.align-right {
+  float: right;
+}
+
+.dialog-title {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.align-right-medium {
+  float: right;
+  font-size: 30px;
+}
+
+.autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
+.autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #f0f0f0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }
+
+#description_dropdown {
+  overflow-y: auto;
+  max-height: 150px;
+  width: 480px;
+  position: relative;
+}
+
+#searchfield form .biginput:focus {
+  color: #858585;
+}
+
+::-moz-selection { background: #a4dcec; }
+
+::selection { background: #a4dcec; }
+::-moz-selection { background: #a4dcec; }
+
+::-webkit-input-placeholder { /* WebKit browsers */
+  color: #ccc;
+  font-style: italic;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #ccc;
+  font-style: italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #ccc;
+  font-style: italic;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #ccc !important;
+  font-style: italic;
+}
+
+/* Die Elemente der  Medikamentenliste werden umgebrochen. */
+
+.ListTitle {
+  overflow: initial;
+  white-space: initial;
+}
+
+
+

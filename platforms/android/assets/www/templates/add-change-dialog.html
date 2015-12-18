@@ -1,0 +1,156 @@
+<!-- Created 5.11.2015 by JD Version 1.0-->
+
+<!-- Das folgende File enthält die HTML Elemente des Dialogs zur Erfassung neuer Medikamente.-->
+
+<ion-view view-title="Add Change">
+
+  <ion-content>
+    <form name="form" ng-model="form">
+      <h3 class="dialog-title">Medikament erfassen</h3>
+      <ion-list>
+
+        <!-- Beginn der Liste -->
+        <!-- Erfassung Medikamentenname und Dosis
+         Beim Tippen werden Elemente aus einem Array, welcher alle zugelassenen Medikamente enthält, angezeigt.
+         Eina Auswahl kann getroffen werden, oder ein Medikament manuell eingetippt werden.-->
+
+        <li class="item item-input item-stacked-label">
+          <span class="input-label">Medikamentenname, Dosis</span>
+          <div class="row" id="searchfield">
+            <div class="col col-90">
+
+              <!-- Die Funktion des Plugins wird hier aufgerufen um die Medikamente, die im Array medilist.js hinterlegt
+              sind, anzeigen zu können. -->
+
+              <angucomplete-alt id="description"
+                                name="description"
+                                ng-model="description"
+                                placeholder=""
+                                pause="1000"
+                                selected-object="description"
+                                local-data="medilist"
+                                search-fields="name"
+                                title-field="name"
+                                minlength="3"
+                                maxlength="100"
+                                input-class="form-control form-control-small"/>
+            </div>
+            <div class="col col-10"></div>
+          </div>
+        </li>
+
+        <!-- Erfassung Regelmässigkeit der Einname mittels eines Dropdowns. -->
+
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Regelmässigkeit
+            </div>
+
+            <!-- Dropdown des Intervalls für die tägliche Einnahme -->
+
+            <select  ng-model="intervall" id="caller" ng-change="checkCondition(intervall)">
+              <option value="" id="">- bitte wählen -</option>
+              <option ng-repeat="(key, value) in data.numbers" key="{{value}}">{{value}}</option>
+            </select>
+
+            <ion-checkbox ng-model="bedarf.checked" name="bedarf" style="border: 0;">bei Bedarf</ion-checkbox>
+          </label>
+
+        <!-- Erfassung Enddatum/Ablaufdatum der Einname mittels einer Datumsauswahl (integriert in Ionic) -->
+
+        <li class="item item-input item-stacked-label">
+          <span ng-hide="bedarf.checked" class="input-label">Enddatum</span>
+          <span ng-show="bedarf.checked" class="input-label">Ablaufdatum</span>
+          <input type="date" placeholder="" name="remind_date" ng-model="remind_date" required />
+        </li>
+
+        <!-- Erfassung der Uhrzeiten der Einnahme werden mit Hilfe des ionic-timepickers erstellt, wobei
+        die Funktion im Controller aufgerufen wurd und dort die Zeit in das entsprechende Format umwandelt
+        und formatiert. -->
+
+
+       <li class="item item-input item-stacked-label" ng-hide="taegl1" >
+         <span class="input-label">Uhrzeit</span>
+         <div class="row"><br> </div>
+         <div class="row item item-divider">
+           <div class="col">
+             <ionic-timepicker input-obj="remind_time1">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl1">
+                 <standard-time-no-meridian etime='remind_time1.inputEpochTime'></standard-time-no-meridian>
+               </button>
+             </ionic-timepicker>
+           </div>
+
+           <div class="col">
+             <ionic-timepicker input-obj="remind_time2">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl2">
+                 <standard-time-no-meridian etime='remind_time2.inputEpochTime'></standard-time-no-meridian>
+               </button>
+             </ionic-timepicker>
+           </div>
+           <div class="col">
+             <ionic-timepicker input-obj="remind_time3">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl3">
+                 <standard-time-no-meridian etime='remind_time3.inputEpochTime'></standard-time-no-meridian>
+               </button>
+             </ionic-timepicker>
+           </div>
+           <div class="col">
+             <ionic-timepicker input-obj="remind_time4">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl4">
+                 <standard-time-no-meridian etime='remind_time4.inputEpochTime'></standard-time-no-meridian>
+               </button>
+             </ionic-timepicker>
+           </div>
+           <div class="col">
+             <ionic-timepicker input-obj="remind_time5">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl5">
+                 <standard-time-no-meridian etime='remind_time5.inputEpochTime'></standard-time-no-meridian>
+               </button>
+             </ionic-timepicker>
+           </div>
+           <div class="col">
+             <ionic-timepicker input-obj="remind_time6">
+               <button class="button button-block button-calm overflowShow" ng-hide="taegl6">
+                 <standard-time-no-meridian etime='remind_time6.inputEpochTime'></standard-time-no-meridian>
+               </button>
+             </ionic-timepicker>
+           </div>
+
+
+
+         </div>
+       </li>
+
+        <!-- Auswahl für Erinnerung an Medikamenteneinnahme mittels Toggle-Funktion-->
+        <a ng-hide="taegl1">
+        <ion-toggle ng-model="pushNotification.checked" name="pushNotification">Erinnerung <x> &nbsp; </x> <i ng-show="pushNotification.checked" class="icon ion-ios-bell small assertive"></i></ion-toggle>
+        </a>
+
+          <!--<div class="col" ng-show="item.pushNotification == true"><div class="col ion-ios-bell small align-right"></div></div>-->
+          <!--</div>-->
+
+
+
+        <!-- Ende der Liste -->
+
+        <!-- Buttons zum Speichern/Abbrechen und Schliessen des Dialogs -->
+
+        <div class="button-bar">
+          <a class="button button-assertive" ng-click="leaveAddChangeDialog(form)">Abbrechen</a>
+          <a class="button button-balanced" ng-show="action=='add'" ng-init="saveEmpty(form)" ng-click="addItem(form)">Speichern</a>
+        </div>
+
+        <!-- Button zum Bearbeiten der einzelnen Elemente des Medikaments nach der Erfassung (noch in Arbeit)-->
+
+      <button class="button button-block button-positive" ng-show="action=='change'" ng-click="editItem(form)">
+          Edit</button>
+
+      </ion-list>
+    </form>
+  </ion-content>
+</ion-view>
+
+
+
+

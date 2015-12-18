@@ -1,0 +1,74 @@
+<!-- Created by JD Version 1.0-->
+
+<!-- In folgenden File werden die verschiedenen Java-Scripts zusammengezogen
+und die App-Struktur miteinander verknüpft. Nebst Javascript werden hier auch
+die Stylesheets einbezogen. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+    <link rel="stylesheet" href="bower_components/ion-autocomplete/dist/ion-autocomplete.css" />
+    <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <link href="styles/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="styles/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+    <script src="bower_components/ion-autocomplete/dist/ion-autocomplete.js"></script>
+    <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <!-- endbower -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/js/angular/angular-resource.min.js"></script>
+    <!-- endbuild -->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <!--  <script src="cordova.js"></script> -->
+
+    <!-- your app's js -->
+    <!-- build:js scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services.js"></script>
+    <script src="scripts/controllers.js"></script>
+    <script src="scripts/configuration.js"></script>
+    <!-- endbuild -->
+
+    <!-- Other Scripts -->
+
+    <script src="bower_components/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
+    <!--<script scr="scripts/jQuery/external/jquery/jquery.js"></script>-->
+    <script scr="scripts/jQuery/jquery-ui.js"></script>
+    <script scr="scripts/jQuery/jquery-ui.min.js"></script>
+
+    <!-- Search Autocomplete -->
+    <script src="scripts/jquery-1.9.1.min.js"></script>
+    <script src="scripts/jquery.autocomplete.min.js"></script>
+    <script src="scripts/currency-autocomplete.js"></script>
+    <script src="scripts/jquery.csv-0.71.js"></script>
+    <script src="scripts/medilist.js"></script>
+  </head>
+
+  <body ng-app="starter" animation="slide-left-right-ios7">
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>

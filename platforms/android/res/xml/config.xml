@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.example.Playground" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="loglevel" value="DEBUG" />
+    <feature name="Keyboard">
+        <param name="android-package" value="com.ionic.keyboard.IonicKeyboard" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="PushNotification">
+        <param name="android-package" onload="true" value="com.pushwoosh.plugin.pushnotifications.PushNotifications" />
+    </feature>
+    <feature name="DatePickerPlugin">
+        <param name="android-package" value="com.plugin.datepicker.DatePickerPlugin" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="LocalNotification">
+        <param name="android-package" value="de.appplant.cordova.plugin.localnotification.LocalNotification" />
+    </feature>
+    <icon density="ldpi" src="resources/android/drawable-ldpi/icon.png" />
+    <icon density="mdpi" src="resources/android/drawable-mdpi/icon.png" />
+    <icon density="hdpi" src="resources/android/drawable-hdpi/icon.png" />
+    <icon density="xhdpi" src="resources/android/drawable-xhdpi/icon.png" />
+    <name>Playground</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
+</widget>
