@@ -21,7 +21,7 @@ Tag noch eingenommen werden müssen.-->
       <!-- Wenn Element 1x täglich ausgewählt, soll Liste angezeigt werden. -->
 
       <div ng-controller="PopupCtrl">
-        <a ng-hide="item.bedarf == true"> <!-- Wieso funktioniert nicht?????? -->
+        <a ng-if="item.bedarf == false"> <!-- Wieso funktioniert nicht?????? -->
         <ion-item ng-repeat="item in list" item="item" item-type="item item-icon-left" on-swipe-down="showLater(item)" ng-hide="peekabooItem" ng-click="showConfirm()" ng-tap="showConfirm()"> <!-- on-swipe-left="peekabooItem = true" -->
           <div class="row row-center">
             <div class="col"><img src="images/ex_medicament.png"></div>
@@ -36,7 +36,7 @@ Tag noch eingenommen werden müssen.-->
       </div>
 
     </ion-list>
-    
+
       <!-- Eine Anleitung zur Bedienung der Todo-Liste (mit verschiedenen Gesten) -->
 
       <div class="card-stable">
