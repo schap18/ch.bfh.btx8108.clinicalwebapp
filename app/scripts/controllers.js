@@ -131,7 +131,6 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
           text: '<b>Ja</b>',
           type: 'button-balanced',
           onTap: function (item) {
-            $scope.peekabooItem = true;
           }
         }
       ]
@@ -337,6 +336,8 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
       $scope.peekabooItem = false;
 
       $scope.hideManual = true;
+
+      $scope.animate = true;
 
       /*myVar = setTimeout(hideElement, 3000);
 
