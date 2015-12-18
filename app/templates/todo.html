@@ -20,7 +20,8 @@ Tag noch eingenommen werden müssen.-->
 
       <!-- Wenn Element 1x täglich ausgewählt, soll Liste angezeigt werden. -->
 
-      <div ng-controller="PopupCtrl" ng-if="remind_time1.value != null ">
+      <div ng-controller="PopupCtrl">
+        <a ng-hide="item.bedarf == true"> <!-- Wieso funktioniert nicht?????? -->
         <ion-item ng-repeat="item in list" item="item" item-type="item item-icon-left" on-swipe-down="showLater(item)" ng-hide="peekabooItem" ng-click="showConfirm()" ng-tap="showConfirm()"> <!-- on-swipe-left="peekabooItem = true" -->
           <div class="row row-center">
             <div class="col"><img src="images/ex_medicament.png"></div>
@@ -31,6 +32,7 @@ Tag noch eingenommen werden müssen.-->
               <k class="SubListTitle" ng-hide="item.remind_date == false"> bis {{ item.remind_date | date: "dd.MM.yyyy" }}</k></div>
           </div>
         </ion-item>
+        </a>
       </div>
 
     </ion-list>
