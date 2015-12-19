@@ -140,15 +140,6 @@ Die folgenden Scripts konfigurieren die Navigation der Menüelemente.
       controller: 'LoginCtrl'
     })
 
-    .state('app.jdplayground', {
-      url: '/jdplayground',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/jdplayground.html'
-        }
-      }
-    })
-
       .state('app.statistik', {
         url: '/statistik',
         views: {

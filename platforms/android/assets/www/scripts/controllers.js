@@ -4,7 +4,7 @@
  * Die folgende Datei enthält alle Scripts, welche Java-Scripts Akvititäten starten.
  */
 
-angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', 'ngCordova'])
+angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', 'ngCordova', 'chart.js'])
 
 .controller('AppCtrl', function($scope, $ionicModal) {
 
@@ -74,7 +74,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     }
   })
 
-  //Beim Klick auf "Passwort vergessen", wird mit Eingabe der E-Mail das neue Passwort an die entsprechende
+  //Beim Klick auf "Passwort vergessen", wird mit Eingabe der E-Mail das Passwort an die entsprechende
   //Email gesendet.
 
 .controller('PopupCtrl', function($scope, $timeout, $q, $ionicPopup) {
@@ -83,10 +83,10 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     $ionicPopup.alert({
       title: 'Passwort vergessen',
 
-      template: '<input type="text" placeholder="E-Mail" ng-model="data.username">',
+      template: '<input type="text" placeholder="E-Mail" ng-model="data.username" value="data.username">',
 
       buttons: [{
-          text: '<b>Zurücksetzen</b>',
+          text: '<b>Zusenden</b>',
           type: 'button-positive',
 
         onTap: function(e) {
@@ -131,7 +131,6 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
           text: '<b>Ja</b>',
           type: 'button-balanced',
           onTap: function (item) {
-            $scope.peekabooItem = true;
           }
         }
       ]
@@ -337,6 +336,8 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
       $scope.peekabooItem = false;
 
       $scope.hideManual = true;
+
+      $scope.animate = true;
 
       /*myVar = setTimeout(hideElement, 3000);
 
@@ -625,7 +626,63 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
       }
     };
-  });
-;
+  })
+
+  // Dougnut Chart
+
+    .controller("DoughnutCtrl", function ($scope) {
+      $scope.labels = ["Noch einzunehmen", "Eingenommen", "Nicht eingenommen"];
+      $scope.data = [2, 3, 1];
+      $scope.colours = ["#e0ebeb", "#70db70", "#ff4d4d"];
+    })
+
+    // Radar Chart
+
+.controller("RadarCtrl", function ($scope) {
+  $scope.labels =["MO", "DI", "MI", "DO", "FR", "SA", "SO"];
+  $scope.series = ['Total Medikamente', 'Eingenommen', 'Nicht eingenommen'];
+  $scope.colours = ["#66c2ff", "#70db70", "#ff4d4d"];
+  $scope.data = [
+    [6, 6, 6, 6, 6, 6, 6], // Total Medikamente
+    [5, 4, 4, 3, 5, 6, 6], // Eingenommen
+    [1, 2, 2, 3, 1, 0, 0] // Nicht eingenommen
+  ];
+})
+
+    // Line Chart
+
+    .controller("LineCtrl", function ($scope) {
+
+      $scope.labels = ["Jan", "Feb", "Mrz", "Apr", "Mai", "Jun", "Jul", "Aug", "Sept", "Nov", "Dez"];
+      $scope.series = ['Total Medikamente','Eingenommen', 'Nicht eingenommen'];
+      $scope.colours = ["#66c2ff", "#70db70", "#ff4d4d"];
+      $scope.data = [
+        [6, 6, 8, 8, 7, 7, 6, 6, 8, 7, 9, 9],  //Total Medikamente
+        [5, 4, 7, 6, 7, 6, 6, 5, 6, 7, 7, 8],  // Eingenommen
+        [1, 2, 1, 2, 0, 1, 0, 1, 2, 1, 0, 1]  // Nicht eingenommen
+      ];
+      $scope.onClick = function (points, evt) {
+        console.log(points, evt);
+      };
+    })
+
+    // Bar Chart
+
+    .controller("BarCtrl", function ($scope) {
+      $scope.labels = ['1', '2', '3', '4'];
+      $scope.series = ['Total Medikamente','Eingenommen', 'Nicht eingenommen'];
+      $scope.colours = ["#66c2ff", "#70db70", "#ff4d4d"];
+
+      $scope.data = [
+        [6, 6, 6, 7],  // Total Medikamente
+        [5, 6, 5, 6], // Eingenommen
+        [1, 0, 1, 1]  // Nicht eingenommen
+      ];
+    })
+
+
+
+;;
+
 
 

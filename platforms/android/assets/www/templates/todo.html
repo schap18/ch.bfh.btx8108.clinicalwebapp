@@ -7,7 +7,7 @@ Tag noch eingenommen werden müssen.-->
 <ion-view view-title="To Do">
   <ion-content ng-controller="TodoList">
 
-    <ion-list option-buttons="itemButtons" show-delete="false">
+    <ion-list>
 
       <!-- Ein Text wird angezeigt, wenn keine Medikamente genommen werden müssen/keine erfasst sind -->
 
@@ -20,17 +20,128 @@ Tag noch eingenommen werden müssen.-->
 
       <!-- Wenn Element 1x täglich ausgewählt, soll Liste angezeigt werden. -->
 
-      <div ng-controller="PopupCtrl" ng-if="remind_time1.value != null ">
-        <ion-item ng-repeat="item in list" item="item" item-type="item item-icon-left" on-swipe-down="showLater(item)" ng-hide="peekabooItem" ng-click="showConfirm()" ng-tap="showConfirm()"> <!-- on-swipe-left="peekabooItem = true" -->
+      <div ng-controller="PopupCtrl">
+
+        <ion-item ng-if="item.remind_time1 && animate"
+                  class="animated"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
+                  ng-repeat="item in list"
+                  item="item" item-type="item item-icon-left"
+                  ng-click="animate=!animate"
+                  ng-hide="!animate">
+
           <div class="row row-center">
             <div class="col"><img src="images/ex_medicament.png"></div>
             <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br>
-              <i class="SubListTitle">{{ item.intervall }}</i>
-              <j class="SubListTitle" ng-if="item.bedarf == true">Einnahme bei Bedarf </j>
               <x>&nbsp;</x>
               <k class="SubListTitle" ng-hide="item.remind_date == false"> bis {{ item.remind_date | date: "dd.MM.yyyy" }}</k></div>
           </div>
+          <div class="row item item-divider">
+            <div class="col text-align-center assertive"><standard-time-no-meridian etime='item.remind_time1'/></div>
+          </div>
         </ion-item>
+
+        <ion-item ng-if="item.remind_time2 && animate"
+                  class="animated"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
+                  ng-repeat="item in list"
+                  item="item" item-type="item item-icon-left"
+                  on-swipe-down="showLater(item)"
+                  ng-click="animate=!animate"
+                  ng-hide="!animate">
+
+          <div class="row row-center">
+            <div class="col"><img src="images/ex_medicament.png"></div>
+            <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br>
+              <x>&nbsp;</x>
+              <k class="SubListTitle" ng-hide="item.remind_date == false"> bis {{ item.remind_date | date: "dd.MM.yyyy" }}</k></div>
+          </div>
+          <div class="row item item-divider">
+            <div class="col text-align-center assertive"><standard-time-no-meridian etime='item.remind_time2'/></div>
+          </div>
+        </ion-item>
+
+        <ion-item ng-if="item.remind_time3 && animate"
+                  class="animated"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
+                  ng-repeat="item in list"
+                  item="item" item-type="item item-icon-left"
+                  on-swipe-down="showLater(item)"
+                  ng-click="animate=!animate"
+                  ng-hide="!animate">
+
+          <div class="row row-center">
+            <div class="col"><img src="images/ex_medicament.png"></div>
+            <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br>
+              <x>&nbsp;</x>
+              <k class="SubListTitle" ng-hide="item.remind_date == false"> bis {{ item.remind_date | date: "dd.MM.yyyy" }}</k></div>
+          </div>
+          <div class="row item item-divider">
+            <div class="col text-align-center assertive"><standard-time-no-meridian etime='item.remind_time3'/></div>
+          </div>
+        </ion-item>
+
+        <ion-item ng-if="item.remind_time4 && animate"
+                  class="animated"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
+                  ng-repeat="item in list"
+                  item="item" item-type="item item-icon-left"
+                  on-swipe-down="showLater(item)"
+                  ng-click="animate=!animate"
+                  ng-hide="!animate">
+
+          <div class="row row-center">
+            <div class="col"><img src="images/ex_medicament.png"></div>
+            <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br>
+              <x>&nbsp;</x>
+              <k class="SubListTitle" ng-hide="item.remind_date == false"> bis {{ item.remind_date | date: "dd.MM.yyyy" }}</k></div>
+          </div>
+          <div class="row item item-divider">
+            <div class="col text-align-center assertive"><standard-time-no-meridian etime='item.remind_time4'/></div>
+          </div>
+        </ion-item>
+
+        <ion-item ng-if="item.remind_time5 && animate"
+                  class="animated"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
+                  ng-repeat="item in list"
+                  item="item" item-type="item item-icon-left"
+                  on-swipe-down="showLater(item)"
+                  ng-click="animate=!animate"
+                  ng-hide="!animate">
+
+          <div class="row row-center">
+            <div class="col"><img src="images/ex_medicament.png"></div>
+            <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br>
+              <x>&nbsp;</x>
+              <k class="SubListTitle" ng-hide="item.remind_date == false"> bis {{ item.remind_date | date: "dd.MM.yyyy" }}</k></div>
+          </div>
+          <div class="row item item-divider">
+            <div class="col text-align-center assertive"><standard-time-no-meridian etime='item.remind_time5'/></div>
+          </div>
+        </ion-item>
+
+        <ion-item ng-if="item.remind_time6 && animate"
+                  class="animated"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
+                  ng-repeat="item in list"
+                  item="item" item-type="item item-icon-left"
+                  on-swipe-down="showLater(item)"
+                  ng-click="animate=!animate"
+                  ng-hide="!animate">
+
+          <div class="row row-center">
+            <div class="col"><img src="images/ex_medicament.png"></div>
+            <div class="col col-75"><b class="ListTitle">{{ item.description }}</b><br>
+              <x>&nbsp;</x>
+              <k class="SubListTitle" ng-hide="item.remind_date == false"> bis {{ item.remind_date | date: "dd.MM.yyyy" }}</k></div>
+          </div>
+          <div class="row item item-divider">
+            <div class="col text-align-center assertive"><standard-time-no-meridian etime='item.remind_time6'/></div>
+          </div>
+        </ion-item>
+
+
       </div>
 
     </ion-list>
@@ -39,18 +150,12 @@ Tag noch eingenommen werden müssen.-->
 
       <div class="card-stable">
       <div class="card">
-        <div class="item item-divider" ng-click="hideManual=false">
+        <div class="item item-divider" ng-click="hideManual=false" >
           Anleitung
         </div>
         <a ng-hide="hideManual">
         <div class="item item-text-wrap ion-navigate">
-          Klick = Erinnerung Bearbeiten
-        </div>
-        <div class="item item-text-wrap ion-android-arrow-forward">
-          Nach rechts wischen = Medikament eingenommen
-        </div>
-        <div class="item item-text-wrap ion-android-arrow-down">
-          Nach unten wischen = Später erinnern
+          Klick = Medikament eingenommen
         </div>
         </a>
       </div>

@@ -24,7 +24,7 @@
     <icon density="mdpi" src="resources/android/drawable-mdpi/icon.png" />
     <icon density="hdpi" src="resources/android/drawable-hdpi/icon.png" />
     <icon density="xhdpi" src="resources/android/drawable-xhdpi/icon.png" />
-    <name>Playground</name>
+    <name>NimmMichEin</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>

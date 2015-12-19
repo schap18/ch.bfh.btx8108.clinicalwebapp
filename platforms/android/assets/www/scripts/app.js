@@ -69,15 +69,6 @@ Die folgenden Scripts konfigurieren die Navigation der Menüelemente.
       }
     })
 
-    .state('app.statistik', {
-      url: '/statistik',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/statistik.html'
-        }
-      }
-    })
-
     .state('app.news', {
       url: '/news',
       views: {
@@ -157,6 +148,15 @@ Die folgenden Scripts konfigurieren die Navigation der Menüelemente.
         }
       }
     })
+
+      .state('app.statistik', {
+        url: '/statistik',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/statistik.html'
+          }
+        }
+      })
 
   ;;
   // if none of the above states are matched, use this as the fallback

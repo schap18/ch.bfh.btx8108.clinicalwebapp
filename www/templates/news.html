@@ -5,6 +5,21 @@
 <ion-view view-title="News">
   <ion-content ng-controller="AppCtrl">
 
+    <!-- Haftungsausschluss welcher beim Laden der Webseite angezeigt wird. -->
+
+    <div class="card-stable" ng-controller="testController" ng-show="text.hidden">
+      <div class="card">
+        <div class="item item-divider ion-alert-circled">
+          Haftungsausschluss
+        </div>
+        <a>
+          <div class="item item-text-wrap">
+            Für Richtigkeit der folgenden Informationen ist der Haftungsausschluss von Die Welt zu beachten.
+          </div>
+        </a>
+      </div>
+    </div>
+
     <!-- Browser in der App wird geladen und die Webseite aufgerufen. -->
 
     <div class="frame">
