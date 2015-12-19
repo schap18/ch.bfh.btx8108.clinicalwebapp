@@ -17,7 +17,11 @@
       Die Elemente werden vom Speicher gezogen und angezeigt (Medikamentenname, Erinnerungszeigen, Enddatum etc.)
        Mittels Klick auf das Element der Liste soll es in einer neuen Maske bearbeitet werden können (noch in Arbeit) -->
 
-      <ion-item ng-controller="PopupCtrl" ng-repeat="item in list" item="item" item-type="item item-icon-left" ng-click="editMedikament()">
+      <ion-item class="animated fadeInDown"
+                ng-controller="PopupCtrl"
+                ng-repeat="item in list"
+                item="item" item-type="item item-icon-left"
+                ng-click="editMedikament()">
 
         <div class="row row-center">
           <div class="col"><img src="images/ex_medicament.png"></div>
@@ -58,7 +62,7 @@
         </div>
         <a ng-hide="hideManual">
         <div class="item item-text-wrap ion-ios-paperplane">
-          Klick auf Medikament = Medikament Bearbeiten/Löschen
+          Klick auf Medikament = Medikament Löschen
         </div>
         </a>
       </div>

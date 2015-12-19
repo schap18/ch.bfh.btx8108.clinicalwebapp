@@ -4,9 +4,99 @@
  neuen Seiten der App-->
 
 <ion-view view-title="Statistik">
-  <ion-content>
-    <h1>Herr Busingers favourite page :)</h1>
-    <h3>-> Tage, Monate etc.</h3>
-    <h3>-> Exportieren</h3>
-  </ion-content>
+
+  <ion-tabs class="tabs-dark tabs-striped tabs-icon-top">
+
+    <ion-tab title="Heute" icon-on="ion-android-done" icon-off="ion-android-done">
+      <ion-nav-view name="tab-1">
+
+        <ion-content padding="true" has-header="true" ng-controller="DoughnutCtrl">
+          <br>
+          <br>
+
+          <canvas id="doughnut"
+                  class="chart chart-doughnut"
+                  height="100"
+                  width="100"
+                  chart-data="data"
+                  chart-labels="labels"
+                  chart-legend="labels"
+                  chart-colours="colours">
+          </canvas>
+        </ion-content>
+
+      </ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="7 Tage" icon-on="ion-android-done-all" icon-off="ion-android-done-all">
+      <ion-nav-view name="tab-2">
+        <ion-content padding="true" has-header="true" ng-controller="RadarCtrl" class="animated zoomIn">
+          <br>
+          <br>
+
+          <canvas id="radar"
+                  class="chart chart-radar"
+                  height="100"
+                  width="100"
+                  chart-data="data"
+                  chart-series="series"
+                  chart-legend="series"
+                  chart-labels="labels"
+                  chart-colours="colours">
+          </canvas>
+
+        </ion-content>
+      </ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="4 Wochen" icon-on="ion-grid" icon-off="ion-grid">
+      <ion-nav-view name="tab-3">
+
+        <ion-content padding="true" has-header="true" ng-controller="BarCtrl">
+          <br>
+          <br>
+
+          <canvas id="bar"
+                  height="100"
+                  width="100"
+                  class="chart chart-bar"
+                  chart-data="data"
+                  chart-labels="labels"
+                  chart-series="series"
+                  chart-legend="series"
+                  chart-colours="colours">
+          </canvas>
+
+        </ion-content>
+
+      </ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="1 Jahr" icon-on="ion-calendar" icon-off="ion-calendar">
+      <ion-nav-view name="tab-4">
+
+          <ion-content padding="true" has-header="true" ng-controller="LineCtrl">
+            <br>
+            <br>
+
+            <canvas id="line"
+                    class="chart chart-line"
+                    height="100"
+                    width="100"
+                    padding-left="10px"
+                    chart-data="data"
+                    chart-labels="labels"
+                    chart-legend="true"
+                    chart-series="series"
+                    chart-click="onClick"
+                    chart-colours="colours">
+            </canvas>
+
+          </ion-content>
+
+      </ion-nav-view>
+    </ion-tab>
+
+  </ion-tabs>
+
 </ion-view>

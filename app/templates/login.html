@@ -13,7 +13,7 @@
 
         <!-- App-Logo -->
 
-        <div class="img">
+        <div class="img animated bounceInDown">
           <img src="images/broennimann.png" alt="HTML5 Icon" width="420" height="300">
           <style>
 
@@ -30,10 +30,10 @@
         <!-- Formulare zur Einhabe des Benutzernamens und Passwort -->
 
         <label class="item item-input">
-          <input type="text" placeholder="E-Mail" ng-model="data.username">
+          <input type="text" placeholder="E-Mail" ng-model="data.username" value="data.username">
         </label>
         <label class="item item-input">
-          <input type="password" placeholder="Passwort" ng-model="data.password">
+          <input type="password" placeholder="Passwort" ng-model="data.password" value="data.password">
         </label>
       </div>
       <button autofocus class="button button-block button-calm" ng-click="login()"  >Login</button>

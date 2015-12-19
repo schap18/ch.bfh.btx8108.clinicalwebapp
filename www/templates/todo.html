@@ -20,11 +20,11 @@ Tag noch eingenommen werden müssen.-->
 
       <!-- Wenn Element 1x täglich ausgewählt, soll Liste angezeigt werden. -->
 
-      <div ng-controller="PopupCtrl" class="animated slideInLeft">
+      <div ng-controller="PopupCtrl">
 
         <ion-item ng-if="item.remind_time1 && animate"
                   class="animated"
-                  ng-class="{slideInLeft: animate, slideOutRight: !animate}"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
                   ng-repeat="item in list"
                   item="item" item-type="item item-icon-left"
                   ng-click="animate=!animate"
@@ -43,7 +43,7 @@ Tag noch eingenommen werden müssen.-->
 
         <ion-item ng-if="item.remind_time2 && animate"
                   class="animated"
-                  ng-class="{slideInLeft: animate, slideOutRight: !animate}"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
                   ng-repeat="item in list"
                   item="item" item-type="item item-icon-left"
                   on-swipe-down="showLater(item)"
@@ -63,7 +63,7 @@ Tag noch eingenommen werden müssen.-->
 
         <ion-item ng-if="item.remind_time3 && animate"
                   class="animated"
-                  ng-class="{slideInLeft: animate, slideOutRight: !animate}"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
                   ng-repeat="item in list"
                   item="item" item-type="item item-icon-left"
                   on-swipe-down="showLater(item)"
@@ -83,7 +83,7 @@ Tag noch eingenommen werden müssen.-->
 
         <ion-item ng-if="item.remind_time4 && animate"
                   class="animated"
-                  ng-class="{slideInLeft: animate, slideOutRight: !animate}"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
                   ng-repeat="item in list"
                   item="item" item-type="item item-icon-left"
                   on-swipe-down="showLater(item)"
@@ -103,7 +103,7 @@ Tag noch eingenommen werden müssen.-->
 
         <ion-item ng-if="item.remind_time5 && animate"
                   class="animated"
-                  ng-class="{slideInLeft: animate, slideOutRight: !animate}"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
                   ng-repeat="item in list"
                   item="item" item-type="item item-icon-left"
                   on-swipe-down="showLater(item)"
@@ -123,7 +123,7 @@ Tag noch eingenommen werden müssen.-->
 
         <ion-item ng-if="item.remind_time6 && animate"
                   class="animated"
-                  ng-class="{slideInLeft: animate, slideOutRight: !animate}"
+                  ng-class="{fadeInDown: animate, slideOutRight: !animate}"
                   ng-repeat="item in list"
                   item="item" item-type="item item-icon-left"
                   on-swipe-down="showLater(item)"
