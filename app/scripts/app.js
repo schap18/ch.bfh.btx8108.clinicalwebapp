@@ -87,6 +87,24 @@ Die folgenden Scripts konfigurieren die Navigation der Menüelemente.
         }
       })
 
+      .state('app.arzneimittelinfo', {
+        url: '/arzneimittelinfo',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/arzneimittelinfo.html'
+          }
+        }
+      })
+
+      .state('app.mediscan', {
+        url: '/mediscan',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/mediscan.html'
+          }
+        }
+      })
+
       .state('app.symptoms', {
         url: '/symptoms',
         views: {

@@ -1,28 +1,29 @@
-<!-- Created 5.11.2015 by JD Version 1.0-->
+<!-- Created 5.11.2015 by MZ Version 1.0-->
 
 <!-- Das folgende File enthält die HTML Elemente der Seite New. Sie dient zur Vorlage von
  neuen Seiten der App-->
 
 <ion-view view-title="Statistik">
 
-  <ion-tabs class="tabs-dark tabs-striped tabs-icon-top">
+  <ion-tabs class="tabs-dark tabs-striped tabs-icon-top"> <!-- GUI für Tabs -->
 
-    <ion-tab title="Heute" icon-on="ion-android-done" icon-off="ion-android-done">
-      <ion-nav-view name="tab-1">
+    <ion-tab title="Heute" icon-on="ion-android-done" icon-off="ion-android-done"> <!-- Icon on: weiss, icon off: grau -->
+      <ion-nav-view name="heute">
 
         <ion-content padding="true" has-header="true" ng-controller="DoughnutCtrl">
-          <br>
+          <br> <!-- Abstand vom oberen Menu-Rand -->
           <br>
 
           <canvas id="doughnut"
                   class="chart chart-doughnut"
-                  height="100"
-                  width="100"
+                  height="100%"
+                  width="100%"
                   chart-data="data"
                   chart-labels="labels"
                   chart-legend="labels"
                   chart-colours="colours">
           </canvas>
+
         </ion-content>
 
       </ion-nav-view>

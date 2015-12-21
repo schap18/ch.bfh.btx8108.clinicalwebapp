@@ -105,9 +105,19 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     });
   };
 
-  $scope.logout = function() {
+  // Logout Funktion
 
-    window.location = 'app.login'
+  $scope.logout = function() {
+    window.location = '#/app/login'
+  }
+
+  // Medikament scannen und hinzufügen
+
+  $scope.redirect = function() {
+
+    setTimeout(function(){
+      window.location="#/app/add-change-dialog.html";
+    },4000); /* 1000 = 1 second*/
   }
 
   //Popup um zu konfirmieren, ob Medikament eingenommen wurde, oder ob man später erinnert werden möchte.
@@ -176,8 +186,11 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         }
         ,
         {
-          text: 'Abbrechen',
+          text: 'weitere Infos',
           type: 'button-calm',
+          onTap: function (item) {
+            window.location = '#/app/arzneimittelinfo';
+          }
         }
       ]
     });
@@ -257,7 +270,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
       $scope.addItem = function(form) {
         var newItem = {};
         // Add values from form to object
-        // newItem.description = form.description.$modelValue.title;//$scope.selectedMedi;
+
         newItem.description = form.description.$modelValue ? form.description.$modelValue.title: $('input#description_value').val();
         newItem.intervall = $scope.intervall; //form.intervall.$modelValue;
         newItem.remind_date = form.remind_date.$viewValue;
@@ -628,7 +641,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     };
   })
 
-  // Dougnut Chart
+  // Dougnut Chart für statistik.html -> Tab Heute
 
     .controller("DoughnutCtrl", function ($scope) {
       $scope.labels = ["Noch einzunehmen", "Eingenommen", "Nicht eingenommen"];
@@ -649,23 +662,6 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
   ];
 })
 
-    // Line Chart
-
-    .controller("LineCtrl", function ($scope) {
-
-      $scope.labels = ["Jan", "Feb", "Mrz", "Apr", "Mai", "Jun", "Jul", "Aug", "Sept", "Nov", "Dez"];
-      $scope.series = ['Total Medikamente','Eingenommen', 'Nicht eingenommen'];
-      $scope.colours = ["#66c2ff", "#70db70", "#ff4d4d"];
-      $scope.data = [
-        [6, 6, 8, 8, 7, 7, 6, 6, 8, 7, 9, 9],  //Total Medikamente
-        [5, 4, 7, 6, 7, 6, 6, 5, 6, 7, 7, 8],  // Eingenommen
-        [1, 2, 1, 2, 0, 1, 0, 1, 2, 1, 0, 1]  // Nicht eingenommen
-      ];
-      $scope.onClick = function (points, evt) {
-        console.log(points, evt);
-      };
-    })
-
     // Bar Chart
 
     .controller("BarCtrl", function ($scope) {
@@ -678,6 +674,23 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         [5, 6, 5, 6], // Eingenommen
         [1, 0, 1, 1]  // Nicht eingenommen
       ];
+    })
+
+    // Line Chart
+
+    .controller("LineCtrl", function ($scope) {
+
+      $scope.labels = ["Jan", "Feb", "Mrz", "Apr", "Mai", "Jun", "Jul", "Aug", "Sept", "Okt", "Nov", "Dez"];
+      $scope.series = ['Total Medikamente','Eingenommen', 'Nicht eingenommen'];
+      $scope.colours = ["#66c2ff", "#70db70", "#ff4d4d"];
+      $scope.data = [
+        [6, 6, 8, 8, 7, 7, 6, 6, 8, 7, 9, 9],  //Total Medikamente
+        [5, 4, 7, 6, 7, 6, 6, 5, 6, 7, 7, 8],  // Eingenommen
+        [1, 2, 1, 2, 0, 1, 0, 1, 2, 0, 2, 1]  // Nicht eingenommen
+      ];
+      $scope.onClick = function (points, evt) {
+        console.log(points, evt);
+      };
     })
 
 
