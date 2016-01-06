@@ -39,8 +39,15 @@
           <div class="col"><standard-time-no-meridian etime='item.remind_time5' ng-if="item.remind_time5" /></div>
           <div class="col"><standard-time-no-meridian etime='item.remind_time6' ng-if="item.remind_time6" /></div>
           <div class="col" ng-if="item.pushNotification == true"><div class="col ion-ios-bell small align-right assertive"></div></div>
+
+          <!--<div ng-if="form.pushNotification.$modelValue == true">-->
+            <!--<div ng-controller="ExampleController" ng-init="add()" >-->
+            <!--</div>-->
+          <!--</div>-->
+
         </div>
       </ion-item>
+
  </ion-list>
 
 
@@ -72,6 +79,13 @@
         </div>
         </a>
       </div>
+    </div>
+
+    <div class="button-bar">
+          <button class="button" ng-click="isScheduled()">Is Scheduled </button>
+    </div>
+
 
   </ion-content>
+
 </ion-view>

@@ -113,11 +113,36 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
   // Medikament scannen und hinzufügen
 
+
+
   $scope.redirect = function() {
 
-    setTimeout(function(){
-      window.location="#/app/add-change-dialog.html";
-    },4000); /* 1000 = 1 second*/
+    // Play Sound
+
+    $scope.playSound = function() {
+      console.log("start function")
+      var my_media = new Media('images/notification.mp3');
+      console.log("media loaded")
+      my_media.play();
+    }
+
+    setTimeout(function () {
+
+        var confirmPopup = $ionicPopup.show({
+          template: "<style>.popup { width:700px; text-align:center; }</style><h4>Medikament wurde erfolgreich gescannt<h4/>",
+          scope: $scope,
+          buttons: [
+            {
+              text: 'Ok',
+              type: 'button-energized',
+              onTap: function (item) {
+                window.location = '#/app/medikamente';
+              }
+            }
+          ]
+        });
+    }, 4000) /* 4000 = 4 seconds */
+
   }
 
   //Popup um zu konfirmieren, ob Medikament eingenommen wurde, oder ob man später erinnert werden möchte.
@@ -201,7 +226,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 //Dieser Controller regelt die Funktionen der Todo-Lsite (Hinzufügen, Anzeigen, Löschen etc.)
 
   .controller('TodoList', ['ListFactory', '$scope', '$ionicModal', '$timeout', '$q', '$ionicPopup',
-    function(ListFactory, $scope, $ionicModal, $timeout, $q, $ionicPopup) {
+    function(ListFactory, $scope, $ionicModal, $timeout, $q, $ionicPopup, $cordovaLocalNotification) {
 
       // Load the add / change dialog from the given template URL
       $ionicModal.fromTemplateUrl('templates/add-change-dialog.html', function(modal) {
@@ -283,6 +308,51 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
           newItem.remind_time5 = $scope.remind_time5.inputEpochTime;
           newItem.remind_time6 = $scope.remind_time6.inputEpochTime;
           newItem.pushNotification = form.pushNotification.$modelValue;
+
+          console.log('Notification is', form.pushNotification.$modelValue);
+
+          if (form.pushNotification.$modelValue == true) {
+
+            console.log('Notification scheduled');
+
+            //Adding a Notification
+
+            var alarmTime = new Date();                           // current date time
+            //alarmTime.setMinutes(alarmTime.getMinutes() + 0);   // add 1 minute to current date time
+            alarmTime.setSeconds(alarmTime.getSeconds() + 4);     //add 4 seconds to current date time
+
+            if (window.cordova) {
+              $cordovaLocalNotification.add({
+                id: "12345",
+                date: alarmTime,
+                title: "Medikament einnehmen",
+                message: "1x Marcoumar 200mg",
+                icon: "#/app/images/github-icon.png",
+                smallIcon: "#/app/images/github-icon.png",
+                autoCancel: true
+
+              }).then(function () {
+                console.log("The notification was set");
+
+              });
+            }
+
+            // Nofitication if Scheduled (true/false)
+
+            $scope.isScheduled = function () {
+
+              console.log('Notification should be scheduled');
+
+              $cordovaLocalNotification.isScheduled("12345").then(function (isScheduled) {
+                alert("Notification 12345 scheduled: " + isScheduled);
+              });
+            };
+          }
+
+
+
+
+
         }
 
         // Save new list in scope and factory
@@ -352,16 +422,6 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
       $scope.animate = true;
 
-      /*myVar = setTimeout(hideElement, 3000);
-
-      function hideElement() {
-        $scope.hideManual = true;
-      }*/
-
-      // Elemente der Todoliste die angezeigt werden
-
-      //????????????????
-
 
       // Diese Funktion regelt die Erfassung und das Speichern der Einnahme-Zeit/-en
 
@@ -380,13 +440,13 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
           }
         };
       }
+
       $scope.remind_time1 = createRemindTimeObject('remind_time1');
       $scope.remind_time2 = createRemindTimeObject('remind_time2');
       $scope.remind_time3 = createRemindTimeObject('remind_time3');
       $scope.remind_time4 = createRemindTimeObject('remind_time4');
       $scope.remind_time5 = createRemindTimeObject('remind_time5');
       $scope.remind_time6 = createRemindTimeObject('remind_time6');
-
 
       function timePickerCallback(val, name) {
         if (typeof (val) === 'undefined') {
@@ -395,20 +455,10 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
           var selectedTime = new Date(val * 1000);
           $scope[name].inputEpochTime = val;
           console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
-
+          console.log('Timevalue is: ', $scope[name].inputEpochTime);
         };
       }
 
-      // Timed Message
-
-
-      function myFunction() {
-        myVar = setTimeout(alertFunc, 3000);
-      }
-
-      function alertFunc() {
-        alert("Hello!");
-      }
       // Hier wird eine Condition ausgeführt, welche die Uhrzeit abhändig von der Auswahl des Intervalls einblendet/ausblendet.
 
       $scope.taegl1 = true;
@@ -538,66 +588,6 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     }
   ])
 
-    .controller("ExampleController", function ($scope, $cordovaLocalNotification) {
-
-
-      //cordova.plugins.notification.local.schedule({
-      //  id: 1,
-      //  title: "Message Title",
-      //  message: "Message Text",
-      //  at: date,
-      //  sound: sound,
-      //  icon: "http://domain.com/icon.png"
-      //});
-
-      // Adding a Notification
-
-
-
-        $scope.addingNot = function () {
-
-// ========== Scheduling
-
-          $scope.scheduleSingleNotification = function () {
-            $cordovaLocalNotification.schedule({
-              id: 1,
-              title: 'Title here',
-              text: 'Text here',
-              data: {
-                customProperty: 'custom value'
-              }
-            }).then(function (result) {
-              // ...
-            });
-          };
-
-
-          //console.log('adding notification');
-          //
-          //var alarmTime = new Date();                         // current date time
-          //alarmTime.setMinutes(alarmTime.getMinutes() + 1);  // add 1 minute to current date time
-          //
-          //console.log('time added');
-          //
-          //$cordovaLocalNotification.add({
-          //  id: "12345",
-          //  date: "alarmTime",
-          //  message: "This is a message",
-          //  title: "This is a title",
-          //  autoCancel: true
-          //}).then(function () {
-          //  console.log("The notification was set");
-          //});
-        };
-
-        // Nofitication if Scheduled (true/false)
-
-        //$scope.isScheduled = function () {
-        //  $cordovaLocalNotification.isScheduled("12345").then(function (isScheduled) {
-        //    alert("Notification 12345 scheduled: " + isScheduled);
-        //  });
-        //};
-    })
 
 // Diese Funktion steuert die Formatierung und Umrechnung der Zeit
 
@@ -645,7 +635,9 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
     .controller("DoughnutCtrl", function ($scope) {
       $scope.labels = ["Noch einzunehmen", "Eingenommen", "Nicht eingenommen"];
-      $scope.data = [2, 3, 1];
+
+      $scope.doughnutdata = [2, 3, 1];
+
       $scope.colours = ["#e0ebeb", "#70db70", "#ff4d4d"];
     })
 
@@ -692,6 +684,55 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         console.log(points, evt);
       };
     })
+
+
+    // Local Notification Cordova
+
+
+    //.controller("ExampleController", function ($scope, $cordovaLocalNotification) {
+    //
+    //  //Adding a Notification
+    //
+    //  var alarmTime = new Date();                           // current date time
+    //  //alarmTime.setMinutes(alarmTime.getMinutes() + 0);   // add 1 minute to current date time
+    //  alarmTime.setSeconds(alarmTime.getSeconds() + 4);     //add 4 seconds to current date time
+    //
+    //  if (window.cordova) {
+    //    $cordovaLocalNotification.schedule({
+    //      id: "12345",
+    //      date: alarmTime,
+    //      title: "Medikament einnehmen",
+    //      message: "1x Marcoumar 200mg",
+    //      icon: "#/app/images/github-icon.png",
+    //      smallIcon: "#/app/images/github-icon.png",
+    //      autoCancel: true
+    //
+    //    }).then(function () {
+    //      console.log("The notification was set");
+    //
+    //    });
+    //
+    //      //// Notification has reached its trigger time
+    //      //cordova.plugins.notification.local.on("trigger", function (notification) {
+    //      //
+    //      //  // After 4 seconds update notification's title
+    //      //  setTimeout(function () {
+    //      //    cordova.plugins.notification.local.update({
+    //      //      id: "12345",
+    //      //      title: "Meeting in 5 minutes!"
+    //      //    });
+    //      //  }, 4000);
+    //      //});
+    //  }
+    //
+    //  // Nofitication if Scheduled (true/false)
+    //
+    //  $scope.isScheduled = function () {
+    //    $cordovaLocalNotification.isScheduled("12345").then(function (isScheduled) {
+    //      alert("Notification 12345 scheduled: " + isScheduled);
+    //    });
+    //  };
+    //})
 
 
 

@@ -39,18 +39,30 @@
           <div class="col"><standard-time-no-meridian etime='item.remind_time5' ng-if="item.remind_time5" /></div>
           <div class="col"><standard-time-no-meridian etime='item.remind_time6' ng-if="item.remind_time6" /></div>
           <div class="col" ng-if="item.pushNotification == true"><div class="col ion-ios-bell small align-right assertive"></div></div>
+
+          <!--<div ng-if="form.pushNotification.$modelValue == true">-->
+            <!--<div ng-controller="ExampleController" ng-init="add()" >-->
+            <!--</div>-->
+          <!--</div>-->
+
         </div>
       </ion-item>
+
  </ion-list>
 
-    <!-- Button zur Erfassung des Medikaments -->
+
 
     <div class="button-bar">
-      <a class="button button-positive icon-left ion-android-create" ng-click="showAddChangeDialog('add')">Medikament erfassen</a>
 
       <!-- Button zum Scannen des Medikaments (zurzeit nicht implementiert) -->
 
-      <a class="button button-positive icon-left ion-qr-scanner">Verpackung scannen</a>
+      <a class="button button-energized icon-left ion-qr-scanner" href="#/app/mediscan">Verpackung scannen</a>
+
+      <!-- Button zur Erfassung des Medikaments -->
+
+      <a class="button button-balanced icon-left ion-android-create" ng-click="showAddChangeDialog('add')">Medikament erfassen</a>
+
+
     </div>
 
     <!-- Eine Anleitung zur Bedienung der Medikamenten-Liste -->
@@ -62,10 +74,26 @@
         </div>
         <a ng-hide="hideManual">
         <div class="item item-text-wrap ion-ios-paperplane">
-          Klick auf Medikament = Medikament Löschen
+          Klick auf Medikament <br><b>= Medikament Löschen / Arzneimittelinformationen öffnen</b>
+
         </div>
         </a>
       </div>
+    </div>
+
+    <div class="button-bar">
+
+
+        <div ng-controller="TodoList">
+
+
+          <button class="button" ng-click="isScheduled()">Is Scheduled </button>
+
+        </div>
+
+    </div>
+
 
   </ion-content>
+
 </ion-view>

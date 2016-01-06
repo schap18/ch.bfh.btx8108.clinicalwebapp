@@ -3,7 +3,7 @@
 <!-- Das folgende File enthält die HTML Elemente der Seite New. Sie dient zur Vorlage von
  neuen Seiten der App-->
 
-<ion-view view-title="Statistik">
+<ion-view view-title="Statistik" ng-controller="TodoList">
 
   <ion-tabs class="tabs-dark tabs-striped tabs-icon-top"> <!-- GUI für Tabs -->
 
@@ -11,14 +11,12 @@
       <ion-nav-view name="heute">
 
         <ion-content padding="true" has-header="true" ng-controller="DoughnutCtrl">
-          <br> <!-- Abstand vom oberen Menu-Rand -->
-          <br>
 
           <canvas id="doughnut"
                   class="chart chart-doughnut"
                   height="100%"
                   width="100%"
-                  chart-data="data"
+                  chart-data="doughnutdata"
                   chart-labels="labels"
                   chart-legend="labels"
                   chart-colours="colours">
