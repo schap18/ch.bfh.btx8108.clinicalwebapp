@@ -28,6 +28,7 @@
         <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
     </feature>
     <preference name="AndroidPersistentFileLocation" value="Internal" />
+    <icon density="ldpi" src="resources/android/drawable-ldpi/icon.png" />
     <icon density="mdpi" src="resources/android/drawable-mdpi/icon.png" />
     <icon density="hdpi" src="resources/android/drawable-hdpi/icon.png" />
     <icon density="xhdpi" src="resources/android/drawable-xhdpi/icon.png" />

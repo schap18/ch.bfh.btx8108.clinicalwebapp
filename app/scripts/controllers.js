@@ -101,8 +101,8 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
               at: alarmTime,
               title: "Hallo Kurt! Ihr Passwort lautet",
               text: "elisabeth",
-              icon: "res://ic-launcher",
-              smallIcon: "res://ic-launcher"
+              icon: "res://ic_launcher",
+              smallIcon: "res://ic_launcher"
             }).then(function () {
               console.log("The notification was set");
             }, function (e) {
@@ -375,7 +375,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
             var alarmTime3 = new Date();
             alarmTime3.setHours($scope.selectedHours);
-            alarmTime3.setMinutes($scope.selectedMinutes);
+            alarmTime3.setMinutes($scope.selectedMinutes-1);
             alarmTime3.setSeconds(0);
 
             // console.log(form.description.$modelValue.title, 'is scheduled for:', $scope.selectedHours, ':', $scope.selectedMinutes);
