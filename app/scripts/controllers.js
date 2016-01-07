@@ -49,6 +49,8 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 })
 
 
+
+
   .controller('SessionsCtrl', function($scope, Session) {
     $scope.sessions = Session.query();
   })
@@ -77,7 +79,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
   //Beim Klick auf "Passwort vergessen", wird mit Eingabe der E-Mail das Passwort an die entsprechende
   //Email gesendet.
 
-.controller('PopupCtrl', function($scope, $timeout, $q, $ionicPopup) {
+.controller('PopupCtrl', function($scope, $timeout, $q, $ionicPopup, $cordovaLocalNotification) {
 
   $scope.showAlert = function() {
     $ionicPopup.alert({
@@ -90,6 +92,23 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
           type: 'button-positive',
 
         onTap: function(e) {
+
+          var alarmTime = new Date();
+
+          if (window.cordova) {
+            $cordovaLocalNotification.add({
+              id: "543",
+              at: alarmTime,
+              title: "Hallo Kurt! Ihr Passwort lautet",
+              text: "elisabeth",
+              icon: "res://ic-launcher",
+              smallIcon: "res://ic-launcher"
+            }).then(function () {
+              console.log("The notification was set");
+            }, function (e) {
+              console.log("notification error: ", e);
+            });
+          }
 
           var alertPopup = $ionicPopup.alert({
             title: 'Danke!',
@@ -115,16 +134,16 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
 
 
-  $scope.redirect = function() {
+  $scope.redirectMediscan = function() {
 
-    // Play Sound
+    // Play Sound (funktioniert nicht
 
-    $scope.playSound = function() {
+    /*$scope.playSound = function() {
       console.log("start function")
       var my_media = new Media('images/notification.mp3');
       console.log("media loaded")
       my_media.play();
-    }
+    }*/
 
     setTimeout(function () {
 
@@ -141,6 +160,36 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
             }
           ]
         });
+    }, 4000) /* 4000 = 4 seconds */
+
+  }
+
+  $scope.redirectPlanscan = function() {
+
+    // Play Sound (funktioniert nicht
+
+    /*$scope.playSound = function() {
+     console.log("start function")
+     var my_media = new Media('images/notification.mp3');
+     console.log("media loaded")
+     my_media.play();
+     }*/
+
+    setTimeout(function () {
+
+      var confirmPopup = $ionicPopup.show({
+        template: "<style>.popup { width:700px; text-align:center; }</style><h4>Medikationsplan wurde erfolgreich gescannt<h4/>",
+        scope: $scope,
+        buttons: [
+          {
+            text: 'Ok',
+            type: 'button-calm',
+            onTap: function (item) {
+              window.location = '#/app/medikamente';
+            }
+          }
+        ]
+      });
     }, 4000) /* 4000 = 4 seconds */
 
   }
@@ -211,10 +260,10 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         }
         ,
         {
-          text: 'weitere Infos',
+          text: 'Medi-Infos',
           type: 'button-calm',
           onTap: function (item) {
-            window.location = '#/app/arzneimittelinfo';
+            window.open('https://compendium.ch/prod/marcoumar-tabl-3-mg/de', "_self");
           }
         }
       ]
@@ -225,7 +274,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
 //Dieser Controller regelt die Funktionen der Todo-Lsite (Hinzufügen, Anzeigen, Löschen etc.)
 
-  .controller('TodoList', ['ListFactory', '$scope', '$ionicModal', '$timeout', '$q', '$ionicPopup',
+  .controller('TodoList', ['ListFactory', '$scope', '$ionicModal', '$timeout', '$q', '$ionicPopup', '$cordovaLocalNotification',
     function(ListFactory, $scope, $ionicModal, $timeout, $q, $ionicPopup, $cordovaLocalNotification) {
 
       // Load the add / change dialog from the given template URL
@@ -317,23 +366,37 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
             //Adding a Notification
 
-            var alarmTime = new Date();                           // current date time
+            //var alarmTime = new Date(new Date().getTime() + 5 * 1000);                           // current date time
+            //
+            //var alarmTime2 = new Date();
+            //alarmTime2.setHours(10);
+            //alarmTime2.setMinutes(54);
+            //alarmTime2.setSeconds(0);
+
+            var alarmTime3 = new Date();
+            alarmTime3.setHours($scope.selectedHours);
+            alarmTime3.setMinutes($scope.selectedMinutes);
+            alarmTime3.setSeconds(0);
+
+            // console.log(form.description.$modelValue.title, 'is scheduled for:', $scope.selectedHours, ':', $scope.selectedMinutes);
+
             //alarmTime.setMinutes(alarmTime.getMinutes() + 0);   // add 1 minute to current date time
-            alarmTime.setSeconds(alarmTime.getSeconds() + 4);     //add 4 seconds to current date time
+            //alarmTime.setSeconds(alarmTime.getSeconds() + 4);     //add 4 seconds to current date time
 
             if (window.cordova) {
               $cordovaLocalNotification.add({
                 id: "12345",
-                date: alarmTime,
-                title: "Medikament einnehmen",
-                message: "1x Marcoumar 200mg",
-                icon: "#/app/images/github-icon.png",
-                smallIcon: "#/app/images/github-icon.png",
-                autoCancel: true
-
+                at: alarmTime3,
+                every: "day",
+                title: form.description.$modelValue.title,
+                text: "JETZT einnehmen",
+                icon: "res://icon",
+                smallIcon: "res://icon",
+                led: "FF0000"
               }).then(function () {
                 console.log("The notification was set");
-
+              },function (e) {
+                console.log("notification error: ", e);
               });
             }
 
@@ -348,11 +411,6 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
               });
             };
           }
-
-
-
-
-
         }
 
         // Save new list in scope and factory
@@ -455,7 +513,9 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
           var selectedTime = new Date(val * 1000);
           $scope[name].inputEpochTime = val;
           console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
-          console.log('Timevalue is: ', $scope[name].inputEpochTime);
+          $scope.selectedHours = selectedTime.getUTCHours();
+          $scope.selectedMinutes = selectedTime.getUTCMinutes();
+          console.log('Hours are: ', $scope.selectedHours, 'Minutes are: ', $scope.selectedMinutes);
         };
       }
 
@@ -643,16 +703,16 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
     // Radar Chart
 
-.controller("RadarCtrl", function ($scope) {
-  $scope.labels =["MO", "DI", "MI", "DO", "FR", "SA", "SO"];
-  $scope.series = ['Total Medikamente', 'Eingenommen', 'Nicht eingenommen'];
-  $scope.colours = ["#66c2ff", "#70db70", "#ff4d4d"];
-  $scope.data = [
-    [6, 6, 6, 6, 6, 6, 6], // Total Medikamente
-    [5, 4, 4, 3, 5, 6, 6], // Eingenommen
-    [1, 2, 2, 3, 1, 0, 0] // Nicht eingenommen
-  ];
-})
+    .controller("RadarCtrl", function ($scope) {
+      $scope.labels =["MO", "DI", "MI", "DO", "FR", "SA", "SO"];
+      $scope.series = ['Total Medikamente', 'Eingenommen', 'Nicht eingenommen'];
+      $scope.colours = ["#66c2ff", "#70db70", "#ff4d4d"];
+      $scope.data = [
+        [6, 6, 6, 6, 6, 6, 6], // Total Medikamente
+        [5, 4, 4, 3, 5, 6, 6], // Eingenommen
+        [1, 2, 2, 3, 1, 0, 0] // Nicht eingenommen
+    ];
+    })
 
     // Bar Chart
 
@@ -686,55 +746,33 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     })
 
 
-    // Local Notification Cordova
+    .controller("InAppBrowser", function ($scope) {
 
+      $scope.openNews = function()
+      {
+        // Open in app browser
+        setTimeout(function(){
+          window.open('http://m.welt.de/gesundheit/#/neu','_self');
+        }, 4000);
+      };
 
-    //.controller("ExampleController", function ($scope, $cordovaLocalNotification) {
-    //
-    //  //Adding a Notification
-    //
-    //  var alarmTime = new Date();                           // current date time
-    //  //alarmTime.setMinutes(alarmTime.getMinutes() + 0);   // add 1 minute to current date time
-    //  alarmTime.setSeconds(alarmTime.getSeconds() + 4);     //add 4 seconds to current date time
-    //
-    //  if (window.cordova) {
-    //    $cordovaLocalNotification.schedule({
-    //      id: "12345",
-    //      date: alarmTime,
-    //      title: "Medikament einnehmen",
-    //      message: "1x Marcoumar 200mg",
-    //      icon: "#/app/images/github-icon.png",
-    //      smallIcon: "#/app/images/github-icon.png",
-    //      autoCancel: true
-    //
-    //    }).then(function () {
-    //      console.log("The notification was set");
-    //
-    //    });
-    //
-    //      //// Notification has reached its trigger time
-    //      //cordova.plugins.notification.local.on("trigger", function (notification) {
-    //      //
-    //      //  // After 4 seconds update notification's title
-    //      //  setTimeout(function () {
-    //      //    cordova.plugins.notification.local.update({
-    //      //      id: "12345",
-    //      //      title: "Meeting in 5 minutes!"
-    //      //    });
-    //      //  }, 4000);
-    //      //});
-    //  }
-    //
-    //  // Nofitication if Scheduled (true/false)
-    //
-    //  $scope.isScheduled = function () {
-    //    $cordovaLocalNotification.isScheduled("12345").then(function (isScheduled) {
-    //      alert("Notification 12345 scheduled: " + isScheduled);
-    //    });
-    //  };
-    //})
+      $scope.openCompendium = function()
+      {
+        // Open in app browser
+        setTimeout(function(){
+          window.open('https://compendium.ch','_self');
+        }, 4000);
+      };
 
+      $scope.openSymptoms = function()
+      {
+        // Open in app browser
+        setTimeout(function(){
+          window.open('http://www.pharmawiki.ch/wiki/index.php?wiki=Indikationen','_self');
+        }, 4000);
+      };
 
+    })
 
 ;;
 

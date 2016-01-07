@@ -17,15 +17,22 @@ Hier können Informationen zu Arzneimittel vom Compendium der Firma Documed abge
           <div class="item item-text-wrap">
             Für Richtigkeit der folgenden Informationen ist der Haftungsausschluss von Documed zu beachten.
           </div>
+          <div class="item item-text-wrap">
+            Die Seite öffnet in 3 Sekunden.
+          </div>
         </a>
       </div>
     </div>
 
+    <div ng-controller="InAppBrowser" ng-init="openCompendium()">
+
+    </div>
+
     <!-- Browser in der App wird geladen und die Webseite aufgerufen. -->
 
-    <div class="frame">
+    <!--<div class="frame">
       <iframe width="100%" height="800px" src="https://compendium.ch/home/de?Platform=Mobile"></iframe>
-    </div>
+    </div>-->
 
   </ion-content>
 </ion-view>

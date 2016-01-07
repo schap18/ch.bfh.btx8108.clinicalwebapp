@@ -28,11 +28,11 @@
         <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
     </feature>
     <preference name="AndroidPersistentFileLocation" value="Internal" />
-    <icon density="mdpi" src="resources/android/icons/mipmap-mdpi/ic_launcher.png" />
-    <icon density="hdpi" src="resources/android/icons/mipmap-hdpi/ic_launcher.png" />
-    <icon density="xhdpi" src="resources/android/icons/mipmap-xhdpi/ic_launcher.png" />
-    <icon density="xxhdpi" src="resources/android/icons/mipmap-xxhdpi/ic_launcher.png" />
-    <icon density="xxxhdpi" src="resources/android/icons/mipmap-xxxhdpi/ic_launcher.png" />
+    <icon density="mdpi" src="resources/android/drawable-mdpi/icon.png" />
+    <icon density="hdpi" src="resources/android/drawable-hdpi/icon.png" />
+    <icon density="xhdpi" src="resources/android/drawable-xhdpi/icon.png" />
+    <icon density="xxhdpi" src="resources/android/drawable-xxhdpi/icon.png" />
+    <icon density="xxxhdpi" src="resources/android/drawable-xxxhdpi/icon.png" />
     <name>RemindMed</name>
     <description>
         An App were a persons medication can be managed and to be reminded for application.

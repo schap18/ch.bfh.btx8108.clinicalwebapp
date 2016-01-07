@@ -59,7 +59,8 @@
     "org.apache.cordova.device",
     "org.apache.cordova.console",
     "com.ionic.keyboard",
-    "com.pushwoosh.plugins.pushwoosh"
+    "com.pushwoosh.plugins.pushwoosh",
+    "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": []
 }

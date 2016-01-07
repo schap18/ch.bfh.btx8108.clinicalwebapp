@@ -56,11 +56,11 @@
 
       <!-- Button zum Scannen des Medikaments (zurzeit nicht implementiert) -->
 
-      <a class="button button-energized icon-left ion-qr-scanner" href="#/app/mediscan">Verpackung scannen</a>
+      <a class="button button-energized icon-left ion-qr-scanner buttonOverflow" href="#/app/mediscan">Verpackung<br>scannen</a>
 
       <!-- Button zur Erfassung des Medikaments -->
 
-      <a class="button button-balanced icon-left ion-android-create" ng-click="showAddChangeDialog('add')">Medikament erfassen</a>
+      <a class="button button-balanced icon-left ion-android-create buttonOverflow" ng-click="showAddChangeDialog('add')">Medikament<br>erfassen</a>
 
 
     </div>
@@ -75,15 +75,14 @@
         <a ng-hide="hideManual">
         <div class="item item-text-wrap ion-ios-paperplane">
           Klick auf Medikament <br><b>= Medikament Löschen / Arzneimittelinformationen öffnen</b>
-
         </div>
         </a>
       </div>
-    </div>
 
-    <div class="button-bar">
-          <button class="button" ng-click="isScheduled()">Is Scheduled </button>
-    </div>
+
+    <!--</div>
+      <button class="button" ng-click="isScheduled()">Is Scheduled </button>
+    </div>-->
 
 
   </ion-content>

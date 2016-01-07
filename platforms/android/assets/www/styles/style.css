@@ -85,3 +85,9 @@ Das folgende File enthält die zusätzlichen CSS Elemente zusätzlich zum Framew
   overflow: initial;
   white-space: initial;
 }
+
+.buttonOverflow {
+  overflow: initial;
+  white-space: normal;
+  line-height: 1.5em;
+}

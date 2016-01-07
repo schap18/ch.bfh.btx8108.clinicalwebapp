@@ -17,7 +17,7 @@
         <li class="item item-input item-stacked-label">
           <span class="input-label">Medikamentenname, Dosis</span>
           <div class="row" id="searchfield">
-            <div class="col col-90">
+
 
               <!-- Die Funktion des Plugins wird hier aufgerufen um die Medikamente, die im Array medilist.js hinterlegt
               sind, anzeigen zu können. -->
@@ -35,26 +35,26 @@
                                 maxlength="100"
                                 input-class="form-control form-control-small"/>
             </div>
-            <div class="col col-10"></div>
           </div>
         </li>
 
         <!-- Erfassung Regelmässigkeit der Einname mittels eines Dropdowns. -->
 
-          <label class="item item-input item-select">
+          <li class="item item-input item-stacked-label">
             <div class="input-label">
               Regelmässigkeit
             </div>
 
             <!-- Dropdown des Intervalls für die tägliche Einnahme -->
 
-            <select  ng-model="intervall" id="caller" ng-change="checkCondition(intervall)">
-              <option value="" id="">- bitte wählen -</option>
+            <ion-checkbox ng-model="bedarf.checked" name="bedarf" style="border: 0;">bei Bedarf</ion-checkbox>
+
+            <select  ng-hide="bedarf.checked" ng-model="intervall" id="caller" ng-change="checkCondition(intervall)">
+              <option value="" id="">-bitte auswählen -</option>
               <option ng-repeat="(key, value) in data.numbers" key="{{value}}">{{value}}</option>
             </select>
 
-            <ion-checkbox ng-model="bedarf.checked" name="bedarf" style="border: 0;">bei Bedarf</ion-checkbox>
-          </label>
+          </li>
 
         <!-- Erfassung Enddatum/Ablaufdatum der Einname mittels einer Datumsauswahl (integriert in Ionic) -->
 
