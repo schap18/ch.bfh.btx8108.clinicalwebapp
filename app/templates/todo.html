@@ -1,7 +1,7 @@
 <!-- Created 5.11.2015 by JD Version 1.0-->
 
-<!-- Das folgende File enthält die HTML Elemente der Seite Todo. Sie zeigt die Medikamente an, welche an diesem
-Tag noch eingenommen werden müssen.-->
+<!-- Das folgende File enthält die HTML Elemente der Seite Todoliste. Sie zeigt die Medikamente an, welche an diesem
+Tag noch eingenommen werden müssen. Medikamente welche als "Einnahme bei Bedarf" markiert sind, erscheinen hier nicht. -->
 
 
 <ion-view view-title="To Do">
@@ -16,7 +16,9 @@ Tag noch eingenommen werden müssen.-->
         <div class="col col-75"><h4>Keine Medikamente zum Einnehmen</h4></div>
       </div>
 
-      <!-- Die Liste der einzunehmenden Medikamente wird angezeigt. Name, Regelmässigkeit, sowie Enddatum sind ersichtlich -->
+      <!-- Die Liste der einzunehmenden Medikamente wird angezeigt. Name, Regelmässigkeit, sowie Enddatum sind ersichtlich
+      Pro Zeit wird das Medikament 1x angezeigt. Aus diesem Grund die mehrfache Aufführung der Medikamente (siehe unten) mit
+       der Verschachtelung mehrerer if-Schlaufen (ng-if). -->
 
       <!-- Wenn Element 1x täglich ausgewählt, soll Liste angezeigt werden. -->
 
@@ -146,11 +148,11 @@ Tag noch eingenommen werden müssen.-->
 
     </ion-list>
 
-      <!-- Eine Anleitung zur Bedienung der Todo-Liste (mit verschiedenen Gesten) -->
+      <!-- Eine Anleitung zur Bedienung der Todoliste (mit verschiedenen Gesten) -->
 
       <div class="card-stable">
       <div class="card">
-        <div class="item item-divider" ng-click="hideManual=false" >
+        <div class="item item-divider" ng-click="hideManual=false" on-hold="hideManual=true">
           Anleitung
         </div>
         <a ng-hide="hideManual">
@@ -160,7 +162,7 @@ Tag noch eingenommen werden müssen.-->
         </a>
       </div>
 
-
+</div>
 
   </ion-content>
 </ion-view>

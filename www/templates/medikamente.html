@@ -1,11 +1,12 @@
 <!-- Created 5.11.2015 by JD Version 1.0-->
 
-<!-- Das folgende File enthält die HTML Elemente der Medikamentenansicht. -->
+<!-- Das folgende File enthält die HTML Elemente der Medikamentenansicht.
+Dies ist die zentralste und wichtigste Seite der App. Hier werden die erfassten Medikamente angezeigt. -->
 
 <ion-view view-title="Medikamente">
   <ion-content ng-controller="TodoList">
 
-    <!-- Listen-Element wird eingeblendet, falls kein Medikament erfasst ist. (also Liste = 0 Elemente aufweist) -->
+    <!-- Listen-Element wird eingeblendet, falls kein Medikament erfasst ist. (also wenn Liste = 0 Elemente aufweist) -->
 
     <ion-list option-buttons="itemButtons" show-delete="false">
       <div class="row" ng-if="list.length == 0">
@@ -15,7 +16,8 @@
 
       <!-- Elemente der zu anzeigenden Medikamente
       Die Elemente werden vom Speicher gezogen und angezeigt (Medikamentenname, Erinnerungszeigen, Enddatum etc.)
-       Mittels Klick auf das Element der Liste soll es in einer neuen Maske bearbeitet werden können (noch in Arbeit) -->
+       Mittels Klick auf das Element der Liste wird ein Dialog angezeigt, wobei das Medikament gelöscht oder Detailinfos
+       (Weiterleitung zum Eintrag des Compendiums) zum Medikament angezeigt werden können -->
 
       <ion-item class="animated fadeInDown"
                 ng-controller="PopupCtrl"
@@ -40,21 +42,14 @@
           <div class="col"><standard-time-no-meridian etime='item.remind_time6' ng-if="item.remind_time6" /></div>
           <div class="col" ng-if="item.pushNotification == true"><div class="col ion-ios-bell small align-right assertive"></div></div>
 
-          <!--<div ng-if="form.pushNotification.$modelValue == true">-->
-            <!--<div ng-controller="ExampleController" ng-init="add()" >-->
-            <!--</div>-->
-          <!--</div>-->
-
         </div>
       </ion-item>
 
  </ion-list>
 
-
-
     <div class="button-bar">
 
-      <!-- Button zum Scannen des Medikaments (zurzeit nicht implementiert) -->
+      <!-- Button zum Scannen des Medikaments (Simulation) -->
 
       <a class="button button-energized icon-left ion-qr-scanner buttonOverflow" href="#/app/mediscan">Verpackung<br>scannen</a>
 
@@ -69,7 +64,7 @@
 
     <div class="card-stable">
       <div class="card">
-        <div class="item item-divider" ng-click="hideManual=false">
+        <div class="item item-divider" ng-click="hideManual=false" on-hold="hideManual=true">
           Anleitung
         </div>
         <a ng-hide="hideManual">
@@ -78,7 +73,9 @@
         </div>
         </a>
       </div>
+    </div>
 
+      <!-- Button mit Alert-Funktion zum Testen der Notifications (ist true, wenn Notification scheduled) -->
 
     <!--</div>
       <button class="button" ng-click="isScheduled()">Is Scheduled </button>

@@ -91,3 +91,8 @@ Das folgende File enthält die zusätzlichen CSS Elemente zusätzlich zum Framew
   white-space: normal;
   line-height: 1.5em;
 }
+
+.popup-container
+{
+  background-color:lightgrey;
+}

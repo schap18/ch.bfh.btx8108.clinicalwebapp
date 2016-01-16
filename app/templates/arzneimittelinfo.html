@@ -6,11 +6,13 @@ Hier können Informationen zu Arzneimittel vom Compendium der Firma Documed abge
 <ion-view view-title="Arzneimittelinformationen">
   <ion-content ng-controller="AppCtrl" overflow-scroll="true">
 
+    <!-- Aufruf des InAppBrowsers (Plugin) gem. Funktion in controller.js -->
+
     <div ng-controller="InAppBrowser" ng-init="openCompendium()">
 
     </div>
 
-
+    <!-- Folgende Funktion zeigt die Webseite ohne Plugin (iframe) an. Sie funktioniert nur beim Browser-Testing (nicht auf Android Gerät) -->
 
     <!--<div class="frame">-->
       <!--<iframe width="100%" height="100%" src="https://compendium.ch/prod/marcoumar-tabl-3-mg/de"></iframe>-->

@@ -1,12 +1,247 @@
 <!-- Created 5.11.2015 by JD Version 1.0-->
 
-<!-- Das folgende File enthält die HTML Elemente der Seite New. Sie dient zur Vorlage von
- neuen Seiten der App-->
+<!-- Das folgende File enthält die HTML Elemente der Seite "Medikationsplan". Sie dient zur Simulation der
+Darstellung eines Mediplans nach Standard von HCI Solutions -->
 
 <ion-view view-title="Medikationsplan">
-  <ion-content ng-controller="PopupCtrl" ng-init="redirectPlanscan()">
+  <ion-content ng-controller="PopupCtrl">
 
-    <img src="images/plan_scan.png" alt="Medikationsplan" style="width:100%;height:100%;">
+    <div class="card-stable" ng-controller="TodoList">
+
+      <!-- QR Code kann mittels Klick angezeigt und mit on-hold wieder ausgeblendet werden. -->
+
+      <div class="card">
+        <div class="item item-calm item-icon-left" ng-click="hideManual=false" on-hold="hideManual=true">
+          <i class="icon ion-grid"></i>
+          <b>QR Code anzeigen</b>
+        </div>
+        <a ng-hide="hideManual">
+            <div class="item item-text-wrap">
+              <img src="images/qrcode.jpg" style="width:100%;height:100%;">
+          </div>
+        </a>
+      </div>
+
+      <!-- Angaben des Patienten/ der Patientin -->
+
+      <div class="card">
+      <div class="item item-divider">
+        Patient/in
+      </div>
+      <div class="item item-text-wrap">
+        <b>Herr Kurt Brönnimann</b><br>Mustergasse 1, 3000 Bern<br>Geboren am: 01.02.1945
+      </div>
+    </div>
+
+      <!-- Angaben des Erstellers/ der Erstellering -->
+
+    <div class="card">
+      <div class="item item-divider">
+        Ersteller/in
+      </div>
+      <div class="item item-text-wrap">
+        <b>Dr. med. Muster Arzt</b><br>Untermattweg 8, 3000 Bern<br>Tel. 044 123 4560<br>arzt@arzt.ch
+      </div>
+    </div>
+
+      <!-- Angaben des Medikament 1-->
+
+    <div class="card" ng-controller="TodoList">
+
+      <div class="item item-assertive item-icon-right" ng-click="hideManual=false" on-hold="hideManual=true">
+        <i class="icon ion-android-arrow-dropdown"></i>
+        <b>Medikament 1</b>
+      </div>
+    <a ng-hide="hideManual">
+      <div class="item item-text-wrap">
+
+        <!-- Tabellen zur Darstellung der Daten -->
+
+        <table style="width:100%">
+
+          <tr>
+            <td><b>Bezeichnung</b></td>
+            <td><b>Mo</b></td>
+            <td><b>Mi</b></td>
+            <td><b>Ab</b></td>
+            <td><b>Na</b></td>
+          </tr>
+          <tr>
+            <td>Marcoumar Tabl 3mg</td>
+            <td>&frac12;</td>
+            <td>-</td>
+            <td>&frac12;</td>
+            <td>-</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="item item-text-wrap">
+
+        <table style="width:100%">
+
+          <tr>
+            <td><b>Einheit</b></td>
+            <td><b>Von</b></td>
+            <td><b>Bis</b></td>
+          </tr>
+          <tr>
+            <td>Stk</td>
+            <td>18.05.2015</td>
+            <td>18.05.2016</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="item item-text-wrap">
+
+        <table style="width:100%">
+
+          <tr>
+            <td><b>Art der Medikation</b></td>
+            <td><b>Anwendungsinstruktionen</b></td>
+          </tr>
+          <tr>
+            <td>Dauer</td>
+            <td>Nach dem Essen</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="item item-text-wrap">
+
+        <table style="width:100%">
+
+          <tr>
+            <td><b>Einnahmegrund</b></td>
+            <td><b>Verordnet durch</b></td>
+          </tr>
+          <tr>
+            <td>Blutverdünnung</td>
+            <td>Muster Ulrich, Schüpfen</td>
+          </tr>
+        </table>
+      </div>
+    </a>
+    </div>
+
+      <!-- Angaben des Medikament 2-->
+
+      <div class="card" ng-controller="TodoList">
+
+        <div class="item item-assertive item-icon-right" ng-click="hideManual=false" on-hold="hideManual=true">
+          <i class="icon ion-android-arrow-dropdown"></i>
+          <b>Medikament 2</b>
+        </div>
+        <a ng-hide="hideManual">
+          <div class="item item-text-wrap">
+
+            <!-- Tabellen zur Darstellung der Daten -->
+
+            <table style="width:100%">
+
+              <tr>
+                <td><b>Bezeichnung</b></td>
+                <td><b>Mo</b></td>
+                <td><b>Mi</b></td>
+                <td><b>Ab</b></td>
+                <td><b>Na</b></td>
+              </tr>
+              <tr>
+                <td>Nexium MupsTabl 20mg</td>
+                <td>1</td>
+                <td>-</td>
+                <td>1</td>
+                <td>-</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="item item-text-wrap">
+
+            <table style="width:100%">
+
+              <tr>
+                <td><b>Einheit</b></td>
+                <td><b>Von</b></td>
+                <td><b>Bis</b></td>
+              </tr>
+              <tr>
+                <td>Stk</td>
+                <td>18.05.2015</td>
+                <td>25.05.2015</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="item item-text-wrap">
+
+            <table style="width:100%">
+
+              <tr>
+                <td><b>Art der Medikation</b></td>
+                <td><b>Anwendungsinstruktionen</b></td>
+              </tr>
+              <tr>
+                <td>Akut</td>
+                <td>Nach dem Essen</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="item item-text-wrap">
+
+            <table style="width:100%">
+
+              <tr>
+                <td><b>Einnahmegrund</b></td>
+                <td><b>Verordnet durch</b></td>
+              </tr>
+              <tr>
+                <td>Sodbrennen</td>
+                <td>Muster Ulrich, Schüpfen</td>
+              </tr>
+            </table>
+          </div>
+        </a>
+      </div>
+
+      <!-- Erfasste Bemerkungen -->
+
+    <div class="card">
+      <div class="item item-divider">
+        Bemerkungen
+      </div>
+      <div class="item item-text-wrap">
+        Testbemerkung
+      </div>
+    </div>
+</div>
+    <div class="button-bar">
+
+      <!-- Button zum Scannen des Mediplans (Simulation) -->
+
+      <a class="button button-royal icon-left ion-qr-scanner" href="#/app/planscan">Aktueller Mediplan scannen</a>
+
+    </div>
+
+    <!-- Eine Anleitung zur Bedienung der View "Mediplan" (mit verschiedenen Gesten) -->
+
+    <div class="card-stable" ng-controller="TodoList">
+      <div class="card">
+        <div class="item item-divider" ng-click="hideManual=false" on-hold="hideManual=true">
+          Anleitung
+        </div>
+        <a ng-hide="hideManual">
+          <div class="item item-text-wrap ion-navigate">
+            Klick = Inhalt anzeigen
+          </div>
+          <div class="item item-text-wrap ion-android-hand">
+            On-hold = Inhalt ausblenden
+          </div>
+        </a>
+      </div>
+    </div>
 
   </ion-content>
 </ion-view>

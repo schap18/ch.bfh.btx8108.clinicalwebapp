@@ -1,9 +1,7 @@
 <!-- Created 5.11.2015 by JD Version 1.0-->
 
-<!-- Das folgende File enthält die HTML Elemente der Seite New. Sie dient zur Vorlage von
- neuen Seiten der App-->
-
-
+<!-- Das folgende File enthält die HTML Elemente der Seite Einstellungen.
+ Alle dieser Einstellungen (ausser der Logout-Funktion) sind nur HTML-Elemente, ohne Javascript Funktion im Hintergrund -->
 
 <ion-view view-title="Einstellungen">
   <ion-content>
@@ -20,21 +18,21 @@
               Profil wechseln
           </a>
 
-          <a class="item item-icon-left" href="#">
+          <li class="item item-toggle item-icon-left">
               <i class="icon ion-android-watch"></i>
               Mit Smart Watch verbinden
-    <label class="toggle" href="#">
-            <input type="checkbox">
-            <div class="track">
-                <div class="handle"></div>
-            </div>
-        </label>
-          </a>
+              <label class="toggle toggle-assertive">
+                  <input type="checkbox">
+                  <div class="track">
+                      <div class="handle"></div>
+                  </div>
+              </label>
+          </li>
 
           <a class="item item-icon-left" href="#/app/login">
               <i class="icon ion-chevron-right"></i>
               Logout
           </a>
-
+      </div>
   </ion-content>
 </ion-view>

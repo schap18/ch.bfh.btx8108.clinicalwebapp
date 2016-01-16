@@ -1,12 +1,14 @@
 /**
  * Created by jd on 02.11.15. Version 1.0
  *
- * Die folgende Datei enthält alle Scripts, welche Java-Scripts Akvititäten starten.
+ * Die folgende Datei enthält ein Grossteil der Scripts, welche Java-Script Akvititäten starten.
  */
 
 angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', 'ngCordova', 'chart.js'])
 
 .controller('AppCtrl', function($scope, $ionicModal) {
+
+  // Login-Modal von Ionic (wird in der App nicht komplett verwendet)
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -48,8 +50,10 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
 })
 
+//--------------------------------------------------------------------------------------------------//
 
 
+// Controller, welche die Sessions steuert
 
   .controller('SessionsCtrl', function($scope, Session) {
     $scope.sessions = Session.query();
@@ -59,25 +63,31 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     $scope.session = Session.get({sessionId: $stateParams.sessionId});
   })
 
+  //--------------------------------------------------------------------------------------------------//
+
+
+  // Controller, welcher alle Funktionen des Logins steuert
+
   .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
     $scope.data = {};
 
- //Funktion für den Login. Bei korrekter Eingabe der Email und des Passwortes, wird die Seite "Browse" geöffnet.
+    // Bei korrekter Eingabe der Email/Benutzername und des Passwortes, wird die View "Medikamente" geöffnet.
+    // bei falscher Passworteingabe erscheint ein Popup
 
     $scope.login = function() {
       LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
         $state.go('app.medikamente');
       }).error(function(data) {
         var alertPopup = $ionicPopup.alert({
-          title: 'Login failed!',
-          template: 'Please check your credentials!'
+          title: 'Login nicht möglich!',
+          template: 'Bitte kontrollieren Sie Ihr Passwort!'
         });
       });
     }
   })
 
-  //Beim Klick auf "Passwort vergessen", wird mit Eingabe der E-Mail das Passwort an die entsprechende
-  //Email gesendet.
+  // Beim Klick auf "Passwort vergessen", wird mit Eingabe der E-Mail das Passwort mittels LocalNotification als
+  // Benachrichtigung an das Device gepusht und angezeigt.
 
 .controller('PopupCtrl', function($scope, $timeout, $q, $ionicPopup, $cordovaLocalNotification) {
 
@@ -95,12 +105,16 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
           var alarmTime = new Date();
 
+          // Diese Condition wird nur ausgeführt, wenn die App auf einem Device läuft. Beim Testen in einem
+          // Browser wirft dieser Codeteil ansonsten eine Exception und wird deshalb übersprungen (Testen ist
+          // nur auf dem Device möglich)
+
           if (window.cordova) {
             $cordovaLocalNotification.add({
               id: "543",
               at: alarmTime,
-              title: "Hallo Kurt! Ihr Passwort lautet",
-              text: "elisabeth",
+              title: "Von: RemindMed   Betreff: Ihr Passwort",
+              text: "Guten Tag Kurt! Ihr Passwort lautet: elisabeth...",
               icon: "res://ic_launcher",
               smallIcon: "res://ic_launcher"
             }).then(function () {
@@ -124,19 +138,19 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     });
   };
 
-  // Logout Funktion
+  // Logout Funktion mittels redirect zur Login-View
 
   $scope.logout = function() {
     window.location = '#/app/login'
   }
 
-  // Medikament scannen und hinzufügen
+  //--------------------------------------------------------------------------------------------------//
 
-
+  // Diese Funktion regelt die Weiterleitung zur Demonstration des Scannens der Medikamenten-Verpackung.
 
   $scope.redirectMediscan = function() {
 
-    // Play Sound (funktioniert nicht
+    // Ton bei erfolgreichem Scan abspielen (funktioniert leider nicht)
 
     /*$scope.playSound = function() {
       console.log("start function")
@@ -144,6 +158,9 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
       console.log("media loaded")
       my_media.play();
     }*/
+
+    // Nach einem Timeout mit 4 sek delay wird ein Popup angezeigt und nach Klicken auf den Ok-Button
+    // die View "Medikamente" aufgerufen
 
     setTimeout(function () {
 
@@ -164,9 +181,11 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
   }
 
+  // Diese Funktion regelt die Weiterleitung zur Demonstration des Scannens des Mediplans.
+
   $scope.redirectPlanscan = function() {
 
-    // Play Sound (funktioniert nicht
+    // Ton bei erfolgreichem Scan abspielen (funktioniert leider nicht)
 
     /*$scope.playSound = function() {
      console.log("start function")
@@ -174,6 +193,9 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
      console.log("media loaded")
      my_media.play();
      }*/
+
+    // Nach einem Timeout mit 4 sek delay wird ein Popup angezeigt und nach Klicken auf den Ok-Button
+    // die View "Medikamente" aufgerufen
 
     setTimeout(function () {
 
@@ -185,7 +207,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
             text: 'Ok',
             type: 'button-calm',
             onTap: function (item) {
-              window.location = '#/app/medikamente';
+              window.location = '#/app/medikationsplan';
             }
           }
         ]
@@ -194,13 +216,14 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
 
   }
 
-  //Popup um zu konfirmieren, ob Medikament eingenommen wurde, oder ob man später erinnert werden möchte.
+  //--------------------------------------------------------------------------------------------------//
+
+  // Popup um zu konfirmieren, ob Medikament eingenommen wurde, oder ob man später erinnert werden möchte.
+  // Wurde zu Testzwecken verwendet. Wird in der aktuellen Version der App nicht verwendet. (Stand 15.1.2016)
 
   $scope.showConfirm = function(item) {
     var confirmPopup = $ionicPopup.show({
       template: "<style>.popup { width:700px; text-align:center; }</style><h4>Medikament eingenommen?<h4/>",
-     // title: 'MyTitle',
-     // subTitle: 'MySubTitle',
       scope: $scope,
       buttons: [
         {
@@ -222,12 +245,11 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
   };
 
   //Pop-Up welches anzeigt, wann die Erinnerung wieder erscheinden soll.
+  // Wurde zu Testzwecken verwendet. Wird in der aktuellen Version der App nicht verwendet. (Stand 15.1.2016)
 
   $scope.showLater = function(item) {
     var confirmPopup = $ionicPopup.show({
       template: "<style>.popup { width:700px; text-align:center; }</style><h4>Erinnerung in<h4/>",
-      // title: 'MyTitle',
-      // subTitle: 'MySubTitle',
       scope: $scope,
       buttons: [
         {
@@ -243,18 +265,19 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     });
   };
 
+  // Pop-up welches anzeigt, wenn ein Medikament mittels Klick ausgewählt wird. Das Medikament kann gelöscht werden,
+  // oder Informationen des Compendiums werden angezeigt (hier zu Demozwecken funktioniert es nur mit Marcoumar).
+
   $scope.editMedikament = function(item) {
     var confirmPopup = $ionicPopup.show({
       template: "<style>.popup { width:700px; text-align:center; }</style><h4>Medikament<h4/>",
-      // title: 'MyTitle',
-      // subTitle: 'MySubTitle',
       scope: $scope,
       buttons: [
         {
-          text: 'Löschen',
+          text: 'Bearbeiten',
           type: 'button-assertive',
           onTap: function (item) {
-            $scope.removeItem(item);
+            $scope.deleteMedikament(item);
           }
 
         }
@@ -270,14 +293,39 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     });
   };
 
+  $scope.deleteMedikament = function(item) {
+    var confirmPopup = $ionicPopup.show({
+      template: "<style>.popup { width:700px; text-align:center; }</style><h4>Medikament<h4/>",
+      scope: $scope,
+      buttons: [
+        {
+          text: 'Löschen',
+          type: 'button-assertive',
+          onTap: function (item) {
+            $scope.removeItem(item);
+          }
+
+        }
+        ,
+        {
+          text: 'Abbrechen',
+          type: 'button-calm'
+        }
+      ]
+    });
+  };
+
 })
 
-//Dieser Controller regelt die Funktionen der Todo-Lsite (Hinzufügen, Anzeigen, Löschen etc.)
+//--------------------------------------------------------------------------------------------------//
+
+// Dieser Controller regelt die Funktionen der Medikamentenliste
 
   .controller('TodoList', ['ListFactory', '$scope', '$ionicModal', '$timeout', '$q', '$ionicPopup', '$cordovaLocalNotification',
     function(ListFactory, $scope, $ionicModal, $timeout, $q, $ionicPopup, $cordovaLocalNotification) {
 
-      // Load the add / change dialog from the given template URL
+      // Den add-change Dialog laden
+
       $ionicModal.fromTemplateUrl('templates/add-change-dialog.html', function(modal) {
         $scope.addDialog = modal;
       }, {
@@ -285,7 +333,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         animation: 'slide-in-up'
       });
 
-      //Dialog zum Hinzufügen anzeigen
+      // Dialog zum Hinzufügen eines Medikament anzeigen und Autocomplete der Suchfunktion aufrufen.
 
       $scope.showAddChangeDialog = function(action) {
         $scope.action = action;
@@ -293,12 +341,12 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         $scope.setupAutocomplete();
       };
 
-      //Dialog zum Hinzufügen schliessen
+      // Dialog zum Hinzufügen eines Medikaments schliessen
 
       $scope.leaveAddChangeDialog = function() {
-        // Remove dialog
+        // Dialog entfernen
         $scope.addDialog.remove();
-        // Reload modal template to have cleared form
+        // Modal Template nochmals laden um Formulare zu clearen
         $ionicModal.fromTemplateUrl('templates/add-change-dialog.html', function(modal) {
           $scope.addDialog = modal;
         }, {
@@ -307,7 +355,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         });
       };
 
-      // verschiedene Funktionen für Buttons (werden nicht verwendet)
+      // Diverse Funktionen für Buttons zum Löschen (werden in dieser Version der App (Stand 15.1.2016) nicht verwendet).
 
       $scope.leftButtons = [];
       var addButton = {};
@@ -333,24 +381,35 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         }
       }];
 
-      // Get list from storage
+      // Liste vom lokalen Speicher aufrufen
       $scope.list = ListFactory.getList();
 
-      // Used to cache the empty form for Edit Dialog
       $scope.saveEmpty = function(form) {
         $scope.form = angular.copy(form);
       }
 
+      //---------------------------------------------- Erfassen & Speichern eines Medikaments --------------------------------------
+
       $scope.addItem = function(form) {
         var newItem = {};
-        // Add values from form to object
+
+       // Werte vom Formular ("Medikament hinzufügen" des add-change-Dialogs) zu Objekten umwandeln
+
+        // Name des Medikaments mittels Autocomplete-Funktion, oder benutzerdefinierte Eingabe wird in ein neues Objekt umgewandelt.
 
         newItem.description = form.description.$modelValue ? form.description.$modelValue.title: $('input#description_value').val();
-        newItem.intervall = $scope.intervall; //form.intervall.$modelValue;
+
+        // Intervall der Medikamenteneinnahme, Erinnerungs- oder Ablaufdatum
+
+        newItem.intervall = $scope.intervall;
         newItem.remind_date = form.remind_date.$viewValue;
         newItem.bedarf = form.bedarf.$modelValue;
+
+        // Condition welche ausgeführt wird, wenn Einnahme bei Bedarf angeklickt wird, kann keine Erinnerungszeit und Erinnerung
+        // erfasst werden.
+
         if (!newItem.bedarf) {
-          newItem.remind_time1 = $scope.remind_time1.inputEpochTime; //form.remind_time1.$modelValue;
+          newItem.remind_time1 = $scope.remind_time1.inputEpochTime;
           newItem.remind_time2 = $scope.remind_time2.inputEpochTime;
           newItem.remind_time3 = $scope.remind_time3.inputEpochTime;
           newItem.remind_time4 = $scope.remind_time4.inputEpochTime;
@@ -358,36 +417,45 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
           newItem.remind_time6 = $scope.remind_time6.inputEpochTime;
           newItem.pushNotification = form.pushNotification.$modelValue;
 
+          // Ausgabe des Status der Notification mittels Boolean auf der Konsole.
+
           console.log('Notification is', form.pushNotification.$modelValue);
+
+          // Wenn Erinnerung auf "true" ist wird eine Notification zur Erinnerung der Medikamenteneinnahme getriggert
 
           if (form.pushNotification.$modelValue == true) {
 
             console.log('Notification scheduled');
 
-            //Adding a Notification
+            // Verschiedene Methoden zum Timen von Notifications
 
-            //var alarmTime = new Date(new Date().getTime() + 5 * 1000);                           // current date time
-            //
+            //var alarmTime = new Date(new Date().getTime() + 5 * 1000);     // new Date() = Aktuelles Datum
+
             //var alarmTime2 = new Date();
             //alarmTime2.setHours(10);
             //alarmTime2.setMinutes(54);
             //alarmTime2.setSeconds(0);
 
+            // Die Zeit, wann die Notification getriggert wird wird vom Zeitselector geholt, wenn der Benutzer
+            // eine Erinnerungszeit auswählt. Nur einfache Erinnerungen sind implementiert.
+
             var alarmTime3 = new Date();
             alarmTime3.setHours($scope.selectedHours);
             alarmTime3.setMinutes($scope.selectedMinutes-1);
-            alarmTime3.setSeconds(0);
+            alarmTime3.setSeconds(45);
+
+            // Funktion zu Testzwecken im Browser
 
             // console.log(form.description.$modelValue.title, 'is scheduled for:', $scope.selectedHours, ':', $scope.selectedMinutes);
 
-            //alarmTime.setMinutes(alarmTime.getMinutes() + 0);   // add 1 minute to current date time
-            //alarmTime.setSeconds(alarmTime.getSeconds() + 4);     //add 4 seconds to current date time
-
             if (window.cordova) {
               $cordovaLocalNotification.add({
-                id: "12345",
+                id: "123",
                 at: alarmTime3,
                 every: "day",
+
+                // Medikamentenname wird in der Benachrichtigung angezeigt.
+
                 title: form.description.$modelValue.title,
                 text: "JETZT einnehmen",
                 icon: "res://icon",
@@ -398,31 +466,33 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
               },function (e) {
                 console.log("notification error: ", e);
               });
+
             }
 
-            // Nofitication if Scheduled (true/false)
+            // Condition welche ausgeführt wird, falls die Notification scheduled ist (true/false)
+            // Diese kann mittels Button für Alert zu Testzwecken in der App aufgerufen werden. (Funktioniert nicht bei Browser-Tests)
 
             $scope.isScheduled = function () {
 
               console.log('Notification should be scheduled');
 
-              $cordovaLocalNotification.isScheduled("12345").then(function (isScheduled) {
-                alert("Notification 12345 scheduled: " + isScheduled);
+              $cordovaLocalNotification.isScheduled("123").then(function (isScheduled) {
+                alert("Notification 123 scheduled: " + isScheduled);
               });
             };
           }
         }
 
-        // Save new list in scope and factory
+        // Neue Liste im Scope un der Factory (Interner Speicher) speichern
         $scope.list.push(newItem);
         ListFactory.setList($scope.list);
 
-        // Close dialog
+        // Add-Change-Dialog schliessen
         $scope.leaveAddChangeDialog();
       };
 
+      // Element von der Liste löschen
       $scope.removeItem = function(item) {
-        // Search & Destroy item from list
         $scope.list.splice($scope.list.indexOf(item), 1);
 
         // Save list in factory
@@ -430,6 +500,8 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
       }
 
       $scope.showEditItem = function(item) {
+
+        // Funktion welche die Bearbeitung eines Elements steuert (wirft Exception, deshalb nicht implementiert)
 
         //console.log("Item selected");
 
@@ -452,9 +524,6 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         //$scope.form.description.$setViewValue(item.remind_time5.inputEpochTime);
         //$scope.form.description.$setViewValue(item.remind_time6.inputEpochTime);
         //$scope.form.description.$setViewValue(item.pushNotification);
-
-
-
       };
 
       $scope.editItem = function(form) {
@@ -471,15 +540,16 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         $scope.leaveAddChangeDialog();
       }
 
-
-      // Elemente der Todoliste ausblenden
+      // Funktionen welche das Ein- und Ausblenden von bestimmten Elementen steuert.
 
       $scope.peekabooItem = false;
 
       $scope.hideManual = true;
+      $scope.hideManually = true;
 
       $scope.animate = true;
 
+      //---------------------------------------------- Steuerung Einnahme-Uhrzeit/-en--------------------------------------
 
       // Diese Funktion regelt die Erfassung und das Speichern der Einnahme-Zeit/-en
 
@@ -499,6 +569,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         };
       }
 
+      // Holen des Input vom Formular und Umwandlung in ein Objekt
       $scope.remind_time1 = createRemindTimeObject('remind_time1');
       $scope.remind_time2 = createRemindTimeObject('remind_time2');
       $scope.remind_time3 = createRemindTimeObject('remind_time3');
@@ -506,6 +577,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
       $scope.remind_time5 = createRemindTimeObject('remind_time5');
       $scope.remind_time6 = createRemindTimeObject('remind_time6');
 
+      // Funktion zur Ausgabe der erfassten Zeit für Testtwecke
       function timePickerCallback(val, name) {
         if (typeof (val) === 'undefined') {
           console.log('Time not selected');
@@ -519,8 +591,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         };
       }
 
-      // Hier wird eine Condition ausgeführt, welche die Uhrzeit abhändig von der Auswahl des Intervalls einblendet/ausblendet.
-
+      // Hier wird eine Condition ausgeführt, welche die Uhrzeit abhändig von der Auswahl des Intervalls ein-/ausblendet.
       $scope.taegl1 = true;
       $scope.taegl2 = true;
       $scope.taegl3 = true;
@@ -528,7 +599,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
       $scope.taegl5 = true;
       $scope.taegl6 = true;
 
-      // Inhalt des Dropdowns
+      // Inhalt des Intervall-Dropdowns
 
       $scope.data = { 'numbers' : ["1x täglich", "2x täglich", "3x täglich", "4x täglich", "5x täglich", "6x täglich"]};
 
@@ -579,62 +650,10 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         }
       };
 
-      /////////////////////////////////////// Timed TestPop Up
+      //---------------------------------------------- Such-Vorschläge--------------------------------------
 
-
-      //function timePopup(val) {
-      //
-      //  $scope.refreshAt = function (hours, minutes, seconds) {
-      //    var now = new Date();
-      //    var then = new Date();
-      //
-      //    console.log('set time is' + remind_time1);
-      //
-      //    if (now.getHours() > hours || (now.getHours() == hours && now.getMinutes() > minutes) || now.getHours() == hours && now.getMinutes() == minutes && now.getSeconds() >= seconds) {
-      //      then.setDate(now.getDate() + 1);
-      //    }
-      //    then.setHours(hours);
-      //    then.setMinutes(minutes);
-      //    then.setSeconds(seconds);
-      //
-      //    var timeout = (then.getTime() - now.getTime());
-      //    setTimeout(showMe, timeout);
-      //    console.log('set timeout for in ' + timeout + 'ms');
-      //  };
-      //  refreshAt(11, 8, 0);
-      //
-      //  //  refreshAt(selectedTime.getUTCHours(), selectetTime.getUTCMinutes(), 00);
-      //  //  refreshAt(remind_time1);
-      //  //  refreshAt(remind_time2);
-      //
-      //  var showMe = $ionicPopup.show({
-      //    template: "<style>.popup { width:700px; text-align:center; }</style><h4>Nimm dis Medi<h4/>",
-      //    // title: 'MyTitle',
-      //    // subTitle: 'MySubTitle',
-      //    scope: $scope,
-      //    buttons: [
-      //      {
-      //        text: 'OK',
-      //        type: 'button-calm'
-      //      },
-      //
-      //      {
-      //        text: 'No. Kein Bock',
-      //        type: 'button-assertive',
-      //      }
-      //    ]
-      //  });
-      //}
-
-      //
-        //////////////////////// Timed PopUp end
-
-
-
-      //---------------------------------------------- Autocomplete--------------------------------------
-
-      //Die folgende Funktion ruft den Array aus medilist.js auf und durchsucht deren Elemente gemäss der Tastatureingabe
-      //des Benutzers bei der Erfassung eines Medikaments.
+      // Die folgende Funktion ruft den Array aus medilist.js auf und durchsucht deren Elemente gemäss der Tastatureingabe
+      // des Benutzers bei der Erfassung eines Medikaments. (Quelle: Erweiterte Präparateliste - Swissmedic - Stand: 31.10.2015)
 
       $scope.medilist = _.map(medilist, function (item) {
         return {name: item}
@@ -642,12 +661,10 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
       $scope.setupAutocomplete = function (){
 
       };
-
-      // ---------------------------------------------End Autocomplete--------------------------------
-
     }
   ])
 
+  //---------------------------------------------- Zeitumrechnung--------------------------------------
 
 // Diese Funktion steuert die Formatierung und Umrechnung der Zeit
 
@@ -691,17 +708,19 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     };
   })
 
+  //---------------------------------------------- Statistiken --------------------------------------
+
   // Dougnut Chart für statistik.html -> Tab Heute
 
     .controller("DoughnutCtrl", function ($scope) {
       $scope.labels = ["Noch einzunehmen", "Eingenommen", "Nicht eingenommen"];
 
-      $scope.doughnutdata = [2, 3, 1];
+      $scope.doughnutdata = [2, 3, 1]; // Noch einzunehmen (2), Eingenommen (3), Nicht eingenommen (1)
 
       $scope.colours = ["#e0ebeb", "#70db70", "#ff4d4d"];
     })
 
-    // Radar Chart
+    // Radar Chart für statistik.html -> Tab 7 Tage
 
     .controller("RadarCtrl", function ($scope) {
       $scope.labels =["MO", "DI", "MI", "DO", "FR", "SA", "SO"];
@@ -714,7 +733,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
     ];
     })
 
-    // Bar Chart
+    // Bar Chart für statistik.html -> Tab 4 Wochen
 
     .controller("BarCtrl", function ($scope) {
       $scope.labels = ['1', '2', '3', '4'];
@@ -728,7 +747,7 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
       ];
     })
 
-    // Line Chart
+    // Line Chart für statistik.html -> Tab 1 Jahr
 
     .controller("LineCtrl", function ($scope) {
 
@@ -740,11 +759,12 @@ angular.module('starter.controllers', ['starter.services', 'ionic-timepicker', '
         [5, 4, 7, 6, 7, 6, 6, 5, 6, 7, 7, 8],  // Eingenommen
         [1, 2, 1, 2, 0, 1, 0, 1, 2, 0, 2, 1]  // Nicht eingenommen
       ];
-      $scope.onClick = function (points, evt) {
-        console.log(points, evt);
-      };
     })
 
+    //---------------------------------------------- In App Browser--------------------------------------
+
+    // Der Controller steuert die Funktionen zum Aufruf von Webseiten (z.B. compendium.ch) über ein
+    // Cordova-Plugin
 
     .controller("InAppBrowser", function ($scope) {
 

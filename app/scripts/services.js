@@ -1,7 +1,7 @@
 /**
  * Created by jd on 31.10.15.
  *
- * Das File steuert die Login-Credentials und kontrolliert werden Richtigkeit.
+ * Das File steuert die Login-Credentials sowie weitere Services.
  */
 
 angular.module('starter.services', ['ngResource'])
@@ -10,13 +10,18 @@ angular.module('starter.services', ['ngResource'])
     return $resource('http://localhost:5000/sessions/:sessionId');
   })
 
+  //---------------------------------------------- Login --------------------------------------
+
+  // Dieser Service regelt die Steuerung der Benutzercredentials. Hier aus Komplexitäts-Gründen mitttels
+  // einfachem String implementiert.
+
 .service('LoginService', function($q) {
   return {
     loginUser: function(name, pw) {
       var deferred = $q.defer();
       var promise = deferred.promise;
 
-      if (name == 'kurt@bfh.ch' && pw == 'elisabeth') {
+      if (name == 'kurt@bfh.ch' || name == 'kurt' && pw == 'elisabeth') {
         deferred.resolve('Welcome ' + name + '!');
       } else {
         deferred.reject('Wrong credentials.');
@@ -34,6 +39,8 @@ angular.module('starter.services', ['ngResource'])
   }
 })
 
+//---------------------------------------------- Timeout Alerts --------------------------------------
+
 // Der folgende Service regelt die Timeouts vom Anzeigen bestimmter Elemente (z.B. Haftungsausschuss)
 
     .service('showAlertSrvc', ['$timeout', function($timeout) {
@@ -49,7 +56,10 @@ angular.module('starter.services', ['ngResource'])
       $scope.text = showAlertSrvc(4500);
     })
 
-  //This function saves the List of the Medication locally
+    //---------------------------------------------- Steuerung Speichern der Liste --------------------------------------
+
+    // Die folgende funktion steuert die Speicherung der Liste (alle Elemente, welche beim Erfassen eines Medikament
+    // eingegeben werden) im lokalen Speicher.
 
   .factory('ListFactory', function() {
 

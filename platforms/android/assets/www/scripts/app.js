@@ -10,6 +10,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+
 var ionicApp = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-timepicker', 'angucomplete-alt', 'ngCordova']);
 
 ionicApp.run(function($ionicPlatform) {
@@ -105,6 +106,15 @@ Die folgenden Scripts konfigurieren die Navigation der Menüelemente.
         }
       })
 
+      .state('app.planscan', {
+        url: '/planscan',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/planscan.html'
+          }
+        }
+      })
+
       .state('app.symptoms', {
         url: '/symptoms',
         views: {
@@ -168,8 +178,9 @@ Die folgenden Scripts konfigurieren die Navigation der Menüelemente.
       })
 
   ;;
-  // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/login');
 
+  // Wenn keine der obigen states gematched werden kann, wird automatisch der state "Login" aufgerufen
+
+    $urlRouterProvider.otherwise('/login');
 
 });

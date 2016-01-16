@@ -11,13 +11,12 @@
 
         <!-- Beginn der Liste -->
         <!-- Erfassung Medikamentenname und Dosis
-         Beim Tippen werden Elemente aus einem Array, welcher alle zugelassenen Medikamente enthält, angezeigt.
-         Eina Auswahl kann getroffen werden, oder ein Medikament manuell eingetippt werden.-->
+         Beim Tippen werden Elemente aus einem Array, welcher alle zugelassenen Medikamente enthält angezeigt.
+         Eine Auswahl kann getroffen werden, oder ein Medikament manuell eingetippt werden.-->
 
         <li class="item item-input item-stacked-label">
           <span class="input-label">Medikamentenname, Dosis</span>
           <div class="row" id="searchfield">
-
 
               <!-- Die Funktion des Plugins wird hier aufgerufen um die Medikamente, die im Array medilist.js hinterlegt
               sind, anzeigen zu können. -->
@@ -56,7 +55,8 @@
 
           </li>
 
-        <!-- Erfassung Enddatum/Ablaufdatum der Einname mittels einer Datumsauswahl (integriert in Ionic) -->
+        <!-- Erfassung Enddatum/Ablaufdatum der Einname mittels Datumsauswahl (integriert in allen Android Geräten bzw. Google Chrome)
+        (beim Testen mit anderen Geräten muss das Datum in folgendem Format eingegeben werden DD/MM/YYYY)-->
 
         <li class="item item-input item-stacked-label">
           <span ng-hide="bedarf.checked" class="input-label">Enddatum</span>
@@ -64,10 +64,9 @@
           <input type="date" placeholder="" name="remind_date" ng-model="remind_date" required />
         </li>
 
-        <!-- Erfassung der Uhrzeiten der Einnahme werden mit Hilfe des ionic-timepickers erstellt, wobei
+        <!-- Erfassung der Uhrzeiten der Einnahme werden mit Hilfe des ionic-timepickers (Plugin) erstellt, wobei
         die Funktion im Controller aufgerufen wurd und dort die Zeit in das entsprechende Format umwandelt
         und formatiert. -->
-
 
        <li class="item item-input item-stacked-label" ng-hide="taegl1" >
          <span class="input-label">Uhrzeit</span>
@@ -116,23 +115,14 @@
                </button>
              </ionic-timepicker>
            </div>
-
-
-
          </div>
        </li>
 
         <!-- Auswahl für Erinnerung an Medikamenteneinnahme mittels Toggle-Funktion-->
+
         <a ng-hide="taegl1">
         <ion-toggle ng-model="pushNotification.checked" name="pushNotification">Erinnerung <x> &nbsp; </x> <i ng-show="pushNotification.checked" class="icon ion-ios-bell small assertive"></i></ion-toggle>
         </a>
-
-          <!--<div class="col" ng-show="item.pushNotification == true"><div class="col ion-ios-bell small align-right"></div></div>-->
-          <!--</div>-->
-
-
-
-        <!-- Ende der Liste -->
 
         <!-- Buttons zum Speichern/Abbrechen und Schliessen des Dialogs -->
 
@@ -140,11 +130,6 @@
           <a class="button button-assertive" ng-click="leaveAddChangeDialog(form)">Abbrechen</a>
           <a class="button button-balanced" ng-show="action=='add'" ng-init="saveEmpty(form)" ng-click="addItem(form)">Speichern</a>
         </div>
-
-        <!-- Button zum Bearbeiten der einzelnen Elemente des Medikaments nach der Erfassung (noch in Arbeit)-->
-
-      <button class="button button-block button-positive" ng-show="action=='change'" ng-click="editItem(form)">
-          Edit</button>
 
       </ion-list>
     </form>

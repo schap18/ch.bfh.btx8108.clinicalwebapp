@@ -1,12 +1,13 @@
-<!-- Created 5.11.2015 by MZ Version 1.0-->
+<!-- Created 8.11.2015 by MZ Version 1.0-->
 
-<!-- Das folgende File enthält die HTML Elemente der Seite New. Sie dient zur Vorlage von
- neuen Seiten der App-->
+<!-- Statistik: zeigt die Statistik der bereits eingenommenen Medikamente, sowie nicht eingenommene Medikamente und jeweils das Total
+für Heute / 7 Tage / 4 Wochen / 1 Jahr -->
 
 <ion-view view-title="Statistik" ng-controller="TodoList">
 
-  <ion-tabs class="tabs-dark tabs-striped tabs-icon-top"> <!-- GUI für Tabs -->
+  <ion-tabs class="tabs-dark tabs-striped tabs-icon-top"> <!-- GUI für Tabs , Teil vom Ionic Framework -->
 
+    <!-- Tab für "Heute" -->
     <ion-tab title="Heute" icon-on="ion-android-done" icon-off="ion-android-done"> <!-- Icon on: weiss, icon off: grau -->
       <ion-nav-view name="heute">
 
@@ -27,9 +28,11 @@
       </ion-nav-view>
     </ion-tab>
 
+    <!-- Tab für "7 Tage" -->
     <ion-tab title="7 Tage" icon-on="ion-android-done-all" icon-off="ion-android-done-all">
-      <ion-nav-view name="tab-2">
-        <ion-content padding="true" has-header="true" ng-controller="RadarCtrl" class="animated zoomIn">
+      <ion-nav-view name="7tage">
+
+        <ion-content padding="true" has-header="true" ng-controller="RadarCtrl" class="animated zoomIn"> <!-- Animatation mit animate.css -->
             <br>
           <canvas id="radar"
                   class="chart chart-radar"
@@ -46,8 +49,9 @@
       </ion-nav-view>
     </ion-tab>
 
+    <!-- Tab für 4 Wochen -->
     <ion-tab title="4 Wochen" icon-on="ion-grid" icon-off="ion-grid">
-      <ion-nav-view name="tab-3">
+      <ion-nav-view name="4wochen">
 
         <ion-content padding="true" has-header="true" ng-controller="BarCtrl">
             <br>
@@ -67,8 +71,9 @@
       </ion-nav-view>
     </ion-tab>
 
+    <!-- Tab für 1 Jahr -->
     <ion-tab title="1 Jahr" icon-on="ion-calendar" icon-off="ion-calendar">
-      <ion-nav-view name="tab-4">
+      <ion-nav-view name="1jahr">
 
           <ion-content padding="true" has-header="true" ng-controller="LineCtrl">
               <br>
@@ -76,20 +81,15 @@
                     class="chart chart-line"
                     height="100"
                     width="100"
-                    padding-left="10px"
                     chart-data="data"
                     chart-labels="labels"
-                    chart-legend="true"
+                    chart-legend="series"
                     chart-series="series"
-                    chart-click="onClick"
                     chart-colours="colours">
             </canvas>
 
           </ion-content>
-
       </ion-nav-view>
     </ion-tab>
-
   </ion-tabs>
-
 </ion-view>

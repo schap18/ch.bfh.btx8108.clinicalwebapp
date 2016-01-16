@@ -1,6 +1,7 @@
 <!-- Created 25.10.2015 by JD Version 1.0-->
 
-<!-- Das folgende File enthält die HTML Elemente welche das Einloggen des Benutzers ermöglichen -->
+<!-- Das folgende File enthält die HTML Elemente welche das Einloggen des Benutzers ermöglichen
+Sie wird beim Start der App als erstes angezeigt.-->
 
 <ion-modal-view>
   <ion-header-bar>
@@ -8,15 +9,14 @@
   </ion-header-bar>
 
   <ion-view view-title="Login" name="login-view">
-    <ion-content class="padding">
+    <ion-content>
       <div class="list list-inset">
 
-        <!-- App-Logo -->
+        <!-- App-Logo bzw. Animation von Frau Brönnimann -->
 
         <div class="img animated bounceInDown">
           <img src="images/elisabethAni.gif" alt="HTML5 Icon" width="420" height="300">
           <style>
-
             div.img {
               margin: 5px;
               padding: 5px;
@@ -26,24 +26,27 @@
         </div>
 
         <!-- Formulare zur Einhabe des Benutzernamens und Passwort -->
-
+        <h4>E-Mail / Benutzername</h4>
         <label class="item item-input">
-          <input type="text" placeholder="E-Mail" ng-model="data.username" value="data.username">
+          <input type="text" ng-model="data.username" value="data.username">
         </label>
+        <h4>Passwort</h4>
         <label class="item item-input">
-          <input type="password" placeholder="Passwort" ng-model="data.password" value="data.password">
+          <input type="password" ng-model="data.password" value="data.password">
         </label>
       </div>
-      <button autofocus class="button button-block button-calm" ng-click="login()"  >Login</button>
+      <button class="button button-block button-calm" ng-click="login()">Login</button>
 
+      <!-- Beim Klick auf "Passwort vergessen" wird ein Alert angezeigt, wo der Benutzer sich sein Passwort zusenden lassen kann. -->
       <div class="buttons">
         <button class="button button-clear" ng-controller="PopupCtrl" ng-click="showAlert()">Passwort vergessen</button>
       </div>
 
       <!-- Hinweis zur Eingabe der Credentials (für Testzwecke) -->
 
-      <!--<a>Benutzername: kurt@bfh.ch</a>-->
+      <!--<a>Email / Benutzername: kurt oder kurt@bfh.ch</a>-->
       <!--<a>Passwort: elisabeth</a>-->
+
     </ion-content>
   </ion-view>
 </ion-modal-view>

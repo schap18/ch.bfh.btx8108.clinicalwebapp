@@ -77,7 +77,7 @@ Das folgende File enthält die zusätzlichen CSS Elemente zusätzlich zum Framew
   font-style: italic;
 }
 
-/* Die Elemente der  Medikamentenliste werden umgebrochen. */
+/* Die Elemente der  Medikamentenliste bzw. Buttons werden umgebrochen. */
 
 .ListTitle {
   overflow: initial;
@@ -88,4 +88,11 @@ Das folgende File enthält die zusätzlichen CSS Elemente zusätzlich zum Framew
   overflow: initial;
   white-space: normal;
   line-height: 1.5em;
+}
+
+/* Hintergrund der Alerts bzw. Popups wird grau angezeigt */
+
+.popup-container
+{
+  background-color:lightgrey;
 }
